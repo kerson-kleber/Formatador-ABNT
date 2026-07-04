@@ -4,7 +4,457 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Formatador ABNT</title>
-<style>@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap');:root{--ink:#1a1410;--paper:#faf7f2;--rule:#c8b99a;--accent:#8b3a1e;--accent-light:#c4622d;--muted:#7a6e62;--field-bg:#f2ede4;--tab-active:#8b3a1e;--tab-inactive:#d4c9b8;--success:#2d6a3f;}*{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Source Serif 4',Georgia,serif;background:var(--paper);color:var(--ink);min-height:100vh;}header{background:var(--ink);color:var(--paper);padding:18px 32px 14px;display:flex;align-items:baseline;gap:16px;border-bottom:3px solid var(--accent);}header h1{font-size:1.45rem;font-weight:600;letter-spacing:0.03em;}header .sub{font-size:0.78rem;color:var(--rule);font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;}.tabs{display:flex;background:var(--ink);padding:0 32px;gap:4px;border-bottom:2px solid var(--accent);}.tab-btn{padding:10px 22px;font-family:'Source Serif 4',serif;font-size:0.88rem;font-weight:300;color:var(--tab-inactive);background:transparent;border:none;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;letter-spacing:0.03em;position:relative;top:2px;}.tab-btn:hover{color:var(--paper);}.tab-btn.active{color:var(--paper);border-bottom-color:var(--accent-light);background:rgba(255,255,255,0.05);}.panel{display:none;padding:32px;max-width:860px;margin:0 auto;}.panel.active{display:block;}.type-toggle{display:flex;gap:0;margin-bottom:28px;border:1.5px solid var(--rule);border-radius:4px;overflow:hidden;width:fit-content;}.type-toggle label{padding:9px 22px;font-size:0.87rem;cursor:pointer;background:var(--field-bg);color:var(--muted);border-right:1.5px solid var(--rule);transition:all 0.18s;user-select:none;letter-spacing:0.02em;}.type-toggle label:last-child{border-right:none;}.type-toggle input[type=radio]{display:none;}.type-toggle input[type=radio]:checked+label{background:var(--accent);color:#fff;font-weight:600;}.section-title{font-size:0.72rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin:24px 0 12px;display:flex;align-items:center;gap:10px;}.section-title::after{content:'';flex:1;height:1px;background:var(--rule);opacity:0.5;}.field-row{display:grid;gap:14px;margin-bottom:14px;}.field-row.cols-2{grid-template-columns:1fr 1fr;}.field-row.cols-3{grid-template-columns:1fr 1fr 1fr;}.field-row.cols-1{grid-template-columns:1fr;}label.field-label{display:block;font-size:0.77rem;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-bottom:5px;letter-spacing:0.05em;text-transform:uppercase;}input[type=text],input[type=email],input[type=date],textarea,select{width:100%;background:var(--field-bg);border:1.5px solid var(--rule);border-radius:3px;padding:9px 12px;font-family:'Source Serif 4',serif;font-size:0.92rem;color:var(--ink);outline:none;transition:border-color 0.18s,box-shadow 0.18s;}input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(139,58,30,0.12);}textarea{resize:vertical;line-height:1.6;min-height:90px;}textarea.tall{min-height:160px;}textarea.xtall{min-height:240px;}.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:3px;padding:12px 28px;font-family:'Source Serif 4',serif;font-size:0.92rem;font-weight:600;cursor:pointer;letter-spacing:0.03em;transition:background 0.18s,transform 0.1s;margin-top:24px;}.btn-primary:hover{background:var(--accent-light);}.btn-primary:active{transform:scale(0.98);}.btn-primary svg{width:16px;height:16px;flex-shrink:0;}.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:3px;padding:10px 24px;font-family:'Source Serif 4',serif;font-size:0.9rem;cursor:pointer;letter-spacing:0.03em;transition:all 0.18s;text-decoration:none;}.btn-secondary:hover{background:var(--accent);color:#fff;}.citation-result{margin-top:20px;background:var(--field-bg);border-left:3px solid var(--accent);border-radius:0 3px 3px 0;padding:16px 18px;font-size:0.92rem;line-height:1.7;display:none;position:relative;}.citation-result.visible{display:block;}.copy-badge{position:absolute;top:10px;right:12px;font-size:0.72rem;font-family:'JetBrains Mono',monospace;color:var(--muted);cursor:pointer;padding:3px 8px;border:1px solid var(--rule);border-radius:3px;transition:all 0.18s;text-transform:uppercase;letter-spacing:0.06em;}.copy-badge:hover{background:var(--accent);color:#fff;border-color:var(--accent);}.copy-badge.copied{background:var(--success);color:#fff;border-color:var(--success);}.ref-hero{text-align:center;padding:48px 32px;border:1.5px dashed var(--rule);border-radius:4px;background:var(--field-bg);}.ref-hero p{font-size:1rem;color:var(--muted);line-height:1.8;max-width:520px;margin:0 auto 28px;font-style:italic;}.info-note{background:rgba(139,58,30,0.06);border:1px solid rgba(139,58,30,0.2);border-radius:3px;padding:10px 14px;font-size:0.82rem;color:var(--muted);margin-top:12px;font-style:italic;line-height:1.6;}.info-cards{display:flex;flex-direction:column;gap:10px;margin-top:20px;}.info-card{background:var(--field-bg);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:0 4px 4px 0;padding:14px 18px;line-height:1.7;}.info-card-title{font-size:0.83rem;font-weight:600;color:var(--accent);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:7px;font-family:'JetBrains Mono',monospace;}.info-card p{font-size:0.84rem;color:var(--muted);margin-bottom:5px;font-style:italic;}.info-card p:last-child{margin-bottom:0;}.info-card--compat{border-left-color:#5a7a5e;}.info-card--compat .info-card-title{color:#3d5c40;}.info-card--obs{border-left-color:#4a6080;}.info-card--obs .info-card-title{color:#334d6b;}.toast{position:fixed;bottom:28px;right:28px;background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:4px;font-size:0.85rem;font-family:'JetBrains Mono',monospace;transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:100;border-left:3px solid var(--accent);max-width:320px;}.toast.show{transform:translateY(0);opacity:1;}.tcc-only{display:none;}.showing-tcc .tcc-only{display:block;}.cascade-row{display:flex;gap:14px;margin-bottom:14px;align-items:flex-end;flex-wrap:wrap;}.cascade-row>div{flex:1;min-width:180px;}@media (max-width:640px){.field-row.cols-2,.field-row.cols-3{grid-template-columns:1fr;}header{padding:14px 16px;}.panel{padding:20px 16px;}.tabs{padding:0 16px;}.tab-btn{padding:10px 14px;font-size:0.82rem;}}.app-footer{background:var(--ink);color:var(--rule);text-align:center;padding:14px 32px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.05em;line-height:1.8;border-top:2px solid var(--accent);}.app-footer strong{color:var(--paper);font-weight:500;}.app-footer .footer-verse{color:var(--accent-light);}</style>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1a1410;
+    --paper: #faf7f2;
+    --rule: #c8b99a;
+    --accent: #8b3a1e;
+    --accent-light: #c4622d;
+    --muted: #7a6e62;
+    --field-bg: #f2ede4;
+    --tab-active: #8b3a1e;
+    --tab-inactive: #d4c9b8;
+    --success: #2d6a3f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 32px 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 3px solid var(--accent);
+  }
+  header h1 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  header .sub {
+    font-size: 0.78rem;
+    color: var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    background: var(--ink);
+    padding: 0 32px;
+    gap: 4px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .tab-btn {
+    padding: 10px 22px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--tab-inactive);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+    position: relative;
+    top: 2px;
+  }
+  .tab-btn:hover { color: var(--paper); }
+  .tab-btn.active {
+    color: var(--paper);
+    border-bottom-color: var(--accent-light);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 32px; max-width: 860px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* ── RADIO TOGGLE ── */
+  .type-toggle {
+    display: flex;
+    gap: 0;
+    margin-bottom: 28px;
+    border: 1.5px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    width: fit-content;
+  }
+  .type-toggle label {
+    padding: 9px 22px;
+    font-size: 0.87rem;
+    cursor: pointer;
+    background: var(--field-bg);
+    color: var(--muted);
+    border-right: 1.5px solid var(--rule);
+    transition: all 0.18s;
+    user-select: none;
+    letter-spacing: 0.02em;
+  }
+  .type-toggle label:last-child { border-right: none; }
+  .type-toggle input[type=radio] { display: none; }
+  .type-toggle input[type=radio]:checked + label {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ── SECTIONS ── */
+  .section-title {
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    opacity: 0.5;
+  }
+
+  /* ── FIELDS ── */
+  .field-row { display: grid; gap: 14px; margin-bottom: 14px; }
+  .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .field-row.cols-1 { grid-template-columns: 1fr; }
+
+  label.field-label {
+    display: block;
+    font-size: 0.77rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  input[type=text], input[type=email], input[type=date], textarea, select {
+    width: 100%;
+    background: var(--field-bg);
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    padding: 9px 12px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.92rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139,58,30,0.12);
+  }
+  textarea {
+    resize: vertical;
+    line-height: 1.6;
+    min-height: 90px;
+  }
+  textarea.tall { min-height: 160px; }
+  textarea.xtall { min-height: 240px; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 12px 28px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.18s, transform 0.1s;
+    margin-top: 24px;
+  }
+  .btn-primary:hover { background: var(--accent-light); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 3px;
+    padding: 10px 24px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.18s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { background: var(--accent); color: #fff; }
+
+  /* ── COPY RESULT ── */
+  .citation-result {
+    margin-top: 20px;
+    background: var(--field-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+    padding: 16px 18px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    display: none;
+    position: relative;
+  }
+  .citation-result.visible { display: block; }
+  .copy-badge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 3px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    transition: all 0.18s;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .copy-badge:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .copy-badge.copied { background: var(--success); color: #fff; border-color: var(--success); }
+
+  /* ── CITAÇÕES: SUB-ABAS INTERNAS ── */
+  .cit-subtabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    border-bottom: 1.5px solid var(--rule);
+  }
+  .cit-subtab-btn {
+    padding: 9px 18px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.86rem;
+    font-weight: 300;
+    color: var(--muted);
+    background: var(--field-bg);
+    border: 1.5px solid var(--rule);
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.18s;
+    position: relative;
+    top: 1.5px;
+  }
+  .cit-subtab-btn:hover { color: var(--accent); }
+  .cit-subtab-btn.active {
+    color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .cit-subpanel { display: none; }
+  .cit-subpanel.active { display: block; }
+
+  /* ── CITAÇÕES: MARCADOR DE SUPRESSÃO "[...]" ── */
+  .supressao-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -6px;
+    margin-bottom: 10px;
+  }
+  .btn-supressao {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--muted);
+    background: transparent;
+    border: 1px dashed var(--rule);
+    border-radius: 3px;
+    padding: 4px 10px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.18s;
+  }
+  .btn-supressao:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── CITAÇÕES: NOTINHA NBR 10520 (fixa/discreta) ── */
+  .nbr-note {
+    font-size: 0.76rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0 0 18px;
+    padding-left: 10px;
+    border-left: 2px solid var(--rule);
+  }
+  .nbr-note strong { color: var(--accent); font-style: normal; }
+
+  /* ── CITAÇÕES: REFERÊNCIA COMPLETA (comparação lado a lado) ── */
+  .ref-compare {
+    margin-top: 10px;
+    background: var(--field-bg);
+    border: 1px dashed var(--rule);
+    border-radius: 3px;
+    padding: 10px 14px;
+  }
+  .ref-compare-label {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  /* ── REFERÊNCIAS TAB ── */
+  .ref-hero {
+    text-align: center;
+    padding: 48px 32px;
+    border: 1.5px dashed var(--rule);
+    border-radius: 4px;
+    background: var(--field-bg);
+  }
+  .ref-hero p {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    font-style: italic;
+  }
+
+  /* ── INFO BOX ── */
+  .info-note {
+    background: rgba(139,58,30,0.06);
+    border: 1px solid rgba(139,58,30,0.2);
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 12px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ── INFO CARDS (Filosfia / Compatibilidade / Observações) ── */
+  .info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .info-card {
+    background: var(--field-bg);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px;
+    line-height: 1.7;
+  }
+  .info-card-title {
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .info-card p {
+    font-size: 0.84rem;
+    color: var(--muted);
+    margin-bottom: 5px;
+    font-style: italic;
+  }
+  .info-card p:last-child { margin-bottom: 0; }
+  .info-card--compat  { border-left-color: #5a7a5e; }
+  .info-card--compat .info-card-title { color: #3d5c40; }
+  .info-card--obs     { border-left-color: #4a6080; }
+  .info-card--obs .info-card-title { color: #334d6b; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 100;
+    border-left: 3px solid var(--accent);
+    max-width: 320px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── TCC EXTRAS ── */
+  .tcc-only { display: none; }
+  .showing-tcc .tcc-only { display: block; }
+
+  .cascade-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .cascade-row > div { flex: 1; min-width: 180px; }
+
+  @media (max-width: 640px) {
+    .field-row.cols-2, .field-row.cols-3 { grid-template-columns: 1fr; }
+    header { padding: 14px 16px; }
+    .panel { padding: 20px 16px; }
+    .tabs { padding: 0 16px; }
+    .tab-btn { padding: 10px 14px; font-size: 0.82rem; }
+  }
+
+  /* ── FOOTER DE AUTORIA ── */
+  .app-footer {
+    background: var(--ink);
+    color: var(--rule);
+    text-align: center;
+    padding: 14px 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+    border-top: 2px solid var(--accent);
+  }
+  .app-footer strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .app-footer .footer-verse {
+    color: var(--accent-light);
+  }
+</style>
 </head>
 <body>
 
@@ -19,6 +469,9 @@
   <button class="tab-btn" onclick="switchTab('citacoes')">③ Citações</button>
 </nav>
 
+<!-- ═══════════════════════════════════════════
+     ABA 1 — ARTIGO / TCC
+══════════════════════════════════════════════ -->
 <div id="panel-artigo" class="panel active">
 
   <div class="type-toggle">
@@ -28,7 +481,7 @@
     <label for="type-tcc">🔘 TCC / Monografia</label>
   </div>
 
-  
+  <!-- CAPA (TCC only) -->
   <div class="tcc-only">
     <div class="section-title">Capa</div>
     <div class="field-row cols-2">
@@ -43,7 +496,7 @@
     </div>
   </div>
 
-  
+  <!-- IDENTIFICAÇÃO -->
   <div class="section-title">Identificação</div>
   <div class="field-row cols-1">
     <div>
@@ -72,7 +525,7 @@
     </div>
   </div>
 
-  
+  <!-- ORIENTADOR (TCC only) -->
   <div class="tcc-only">
     <div class="field-row cols-2">
       <div>
@@ -86,7 +539,7 @@
     </div>
   </div>
 
-  
+  <!-- RESUMO -->
   <div class="section-title">Resumo</div>
   <div class="field-row cols-1">
     <div>
@@ -101,7 +554,7 @@
     </div>
   </div>
 
-  
+  <!-- CORPO -->
   <div class="section-title">Corpo do Texto</div>
   <div class="field-row cols-1">
     <div>
@@ -122,7 +575,7 @@
     </div>
   </div>
 
-  
+  <!-- REFERÊNCIAS -->
   <div class="section-title">Referências</div>
   <div class="field-row cols-1">
     <div>
@@ -138,10 +591,10 @@
     ℹ️ O DOCX gerado segue as configurações ABNT: Arial 12pt, margens 3/2/3/2 cm, papel A4, espaçamento 1,5, parágrafos justificados, numeração no canto superior direito. Ajustes finos (notas de rodapé, figuras, listas) podem ser feitos no Word ou LibreOffice.
   </div>
 
-  
+  <!-- ── CAIXAS INFORMATIVAS ── -->
   <div class="info-cards">
 
-    
+    <!-- 1. Filosofia do Projeto -->
     <div class="info-card">
       <div class="info-card-title">🎓 Filosofia do Projeto</div>
       <p>Este projeto foi criado para democratizar o acesso à formatação acadêmica.</p>
@@ -149,14 +602,14 @@
       <p>Gratuito, livre e desenvolvido para apoiar a educação.</p>
     </div>
 
-    
+    <!-- 2. Compatibilidade Institucional -->
     <div class="info-card info-card--compat">
       <div class="info-card-title">📌 Compatibilidade Institucional</div>
       <p>Embora o documento seja gerado seguindo as principais normas ABNT vigentes, algumas instituições de ensino possuem manuais próprios com exigências específicas.</p>
       <p>Recomenda-se conferir as orientações da sua instituição e realizar eventuais ajustes após a geração do documento.</p>
     </div>
 
-    
+    <!-- 3. Observações Acadêmicas -->
     <div class="info-card info-card--obs">
       <div class="info-card-title">📚 Observações Acadêmicas</div>
       <p>Este formatador auxilia exclusivamente na organização e formatação técnica de trabalhos acadêmicos conforme os padrões ABNT mais utilizados.</p>
@@ -174,6 +627,9 @@
   </button>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     ABA 2 — REFERÊNCIAS
+══════════════════════════════════════════════ -->
 <div id="panel-referencias" class="panel">
   <div class="ref-hero">
     <div class="section-title" style="justify-content:center;margin-bottom:20px;">② Formatação de Referências</div>
@@ -190,78 +646,714 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     ABA 3 — CITAÇÕES
+══════════════════════════════════════════════ -->
 <div id="panel-citacoes" class="panel">
   <div class="section-title">③ Formatador de Citações — NBR 10520</div>
 
-  <div class="cascade-row">
-    <div>
-      <label class="field-label" for="cit-tipo">Tipo de citação</label>
-      <select id="cit-tipo" onchange="onCitTipoChange()">
-        <option value="">— selecione —</option>
-        <option value="direta-curta">Direta curta (até 3 linhas)</option>
-        <option value="direta-longa">Direta longa (mais de 3 linhas)</option>
-        <option value="indireta">Indireta (paráfrase)</option>
-      </select>
-    </div>
-    <div id="cit-sub-wrap" style="display:none;">
-      <label class="field-label" for="cit-posicao">Posição da referência</label>
-      <select id="cit-posicao">
-        <option value="apos">Após o trecho (autor, ano)</option>
-        <option value="antes">Antes do trecho — Autor (ano)</option>
-      </select>
-    </div>
+  <div class="cit-subtabs">
+    <button type="button" class="cit-subtab-btn active" onclick="switchCitSub('curta')">Direta curta</button>
+    <button type="button" class="cit-subtab-btn" onclick="switchCitSub('longa')">Direta longa</button>
+    <button type="button" class="cit-subtab-btn" onclick="switchCitSub('indireta')">Indireta</button>
   </div>
 
-  <div id="cit-fields" style="display:none;">
-    <div class="field-row cols-1" id="wrap-trecho">
+  <!-- ── SUB-ABA: DIRETA CURTA (até 3 linhas) ── -->
+  <div id="cit-sub-curta" class="cit-subpanel active">
+    <div class="info-note" style="margin-top:0;margin-bottom:18px;">
+      Citação direta de até 3 linhas: entra no corpo do parágrafo, entre aspas.
+    </div>
+
+    <div class="field-row cols-1">
       <div>
-        <label class="field-label" for="cit-trecho" id="lbl-trecho">Trecho do autor</label>
-        <textarea id="cit-trecho" class="tall" placeholder="Cole aqui o trecho exatamente como está na fonte…"></textarea>
+        <label class="field-label" for="curta-trecho">Trecho do autor (cole exatamente como está na fonte)</label>
+        <textarea id="curta-trecho" class="tall" placeholder="Cole aqui o trecho…"></textarea>
       </div>
     </div>
+    <div class="supressao-row">
+      <button type="button" class="btn-supressao" onclick="inserirSupressao('curta-trecho')">+ inserir [...] no cursor</button>
+    </div>
+    <div class="nbr-note">
+      <strong>NBR 10520:</strong> o marcador [...] indica supressão de um trecho dentro da citação. Clique no ponto exato do texto acima onde você cortou algo e depois no botão. Exemplo do dia a dia: <em>"Fui à feira, comprei fruta, verdura [...] e voltei pra casa."</em>
+    </div>
+
     <div class="field-row cols-3">
       <div>
-        <label class="field-label" for="cit-sobrenome">Sobrenome</label>
-        <input type="text" id="cit-sobrenome" placeholder="SILVA">
+        <label class="field-label" for="curta-sobrenome">Sobrenome do autor</label>
+        <input type="text" id="curta-sobrenome" placeholder="SILVA">
       </div>
       <div>
-        <label class="field-label" for="cit-ano">Ano</label>
-        <input type="text" id="cit-ano" placeholder="2004">
+        <label class="field-label" for="curta-ano">Ano</label>
+        <input type="text" id="curta-ano" placeholder="2004">
       </div>
-      <div id="wrap-pagina">
-        <label class="field-label" for="cit-pagina">Página</label>
-        <input type="text" id="cit-pagina" placeholder="42">
+      <div>
+        <label class="field-label" for="curta-pagina">Página(s)</label>
+        <input type="text" id="curta-pagina" placeholder="42">
       </div>
     </div>
 
-    <button class="btn-primary" onclick="formatarCitacao()">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M1 4h14M1 8h9M1 12h6"/>
-      </svg>
+    <div class="field-row cols-1">
+      <div>
+        <label class="field-label" for="curta-refcompleta">Referência completa <small style="font-weight:300;text-transform:none;">(opcional — só para você comparar visualmente de onde vêm os dados; a ferramenta não processa este campo)</small></label>
+        <textarea id="curta-refcompleta" placeholder="Cole aqui a referência completa, se quiser conferir lado a lado…"></textarea>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="formatarCitacaoCurta()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4h14M1 8h9M1 12h6"/></svg>
       Formatar Citação
     </button>
 
-    <div id="cit-resultado" class="citation-result">
-      <span class="copy-badge" onclick="copiarCitacao()">Copiar</span>
-      <div id="cit-texto"></div>
-      <div id="cit-orientacao" style="margin-top:10px;font-size:0.8rem;color:var(--muted);font-style:italic;"></div>
+    <div id="curta-resultado" class="citation-result">
+      <span class="copy-badge" onclick="copiarCitacao('curta-texto', this)">Copiar</span>
+      <div id="curta-texto"></div>
+      <div id="curta-refcompleta-display" class="ref-compare" style="display:none;">
+        <div class="ref-compare-label">Referência completa (informada por você)</div>
+        <div id="curta-refcompleta-texto"></div>
+      </div>
+      <div style="margin-top:10px;font-size:0.8rem;color:var(--muted);font-style:italic;">Citação direta curta: inserida no parágrafo, entre aspas duplas.</div>
     </div>
   </div>
 
-  <div id="cit-placeholder" style="margin-top:24px;color:var(--muted);font-style:italic;font-size:0.9rem;">
-    Selecione o tipo de citação para começar.
+  <!-- ── SUB-ABA: DIRETA LONGA (mais de 3 linhas) ── -->
+  <div id="cit-sub-longa" class="cit-subpanel">
+    <div class="info-note" style="margin-top:0;margin-bottom:18px;">
+      Citação direta com mais de 3 linhas: destacada do parágrafo, sem aspas.
+    </div>
+
+    <div class="field-row cols-1">
+      <div>
+        <label class="field-label" for="longa-trecho">Trecho do autor (cole exatamente como está na fonte)</label>
+        <textarea id="longa-trecho" class="xtall" placeholder="Cole aqui o trecho…"></textarea>
+      </div>
+    </div>
+    <div class="supressao-row">
+      <button type="button" class="btn-supressao" onclick="inserirSupressao('longa-trecho')">+ inserir [...] no cursor</button>
+    </div>
+    <div class="nbr-note">
+      <strong>NBR 10520:</strong> o marcador [...] indica supressão de um trecho dentro da citação. Clique no ponto exato do texto acima onde você cortou algo e depois no botão. Exemplo do dia a dia: <em>"Fui à feira, comprei fruta, verdura [...] e voltei pra casa."</em>
+    </div>
+
+    <div class="field-row cols-3">
+      <div>
+        <label class="field-label" for="longa-sobrenome">Sobrenome do autor</label>
+        <input type="text" id="longa-sobrenome" placeholder="SILVA">
+      </div>
+      <div>
+        <label class="field-label" for="longa-ano">Ano</label>
+        <input type="text" id="longa-ano" placeholder="2004">
+      </div>
+      <div>
+        <label class="field-label" for="longa-pagina">Página(s)</label>
+        <input type="text" id="longa-pagina" placeholder="42">
+      </div>
+    </div>
+
+    <div class="field-row cols-1">
+      <div>
+        <label class="field-label" for="longa-refcompleta">Referência completa <small style="font-weight:300;text-transform:none;">(opcional — só para você comparar visualmente de onde vêm os dados; a ferramenta não processa este campo)</small></label>
+        <textarea id="longa-refcompleta" placeholder="Cole aqui a referência completa, se quiser conferir lado a lado…"></textarea>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="formatarCitacaoLonga()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4h14M1 8h9M1 12h6"/></svg>
+      Formatar Citação
+    </button>
+
+    <div id="longa-resultado" class="citation-result">
+      <span class="copy-badge" onclick="copiarCitacao('longa-texto', this)">Copiar</span>
+      <div id="longa-texto"></div>
+      <div id="longa-refcompleta-display" class="ref-compare" style="display:none;">
+        <div class="ref-compare-label">Referência completa (informada por você)</div>
+        <div id="longa-refcompleta-texto"></div>
+      </div>
+      <div style="margin-top:10px;font-size:0.8rem;color:var(--muted);font-style:italic;">Citação direta longa: sem aspas. No seu editor de texto (Word/LibreOffice), aplique recuo de 4 cm da margem esquerda, fonte 10 e espaçamento simples — a ferramenta não aplica formatação de parágrafo.</div>
+    </div>
   </div>
+
+  <!-- ── SUB-ABA: INDIRETA ── -->
+  <div id="cit-sub-indireta" class="cit-subpanel">
+    <div class="info-note" style="margin-top:0;margin-bottom:18px;">
+      Citação indireta (paráfrase): você escreve o texto com suas próprias palavras; a ferramenta só monta a referência entre parênteses.
+    </div>
+
+    <div class="field-row cols-3">
+      <div>
+        <label class="field-label" for="ind-sobrenome">Sobrenome do autor</label>
+        <input type="text" id="ind-sobrenome" placeholder="SILVA">
+      </div>
+      <div>
+        <label class="field-label" for="ind-ano">Ano</label>
+        <input type="text" id="ind-ano" placeholder="2004">
+      </div>
+      <div>
+        <label class="field-label" for="ind-pagina">Página(s) <small style="font-weight:300;text-transform:none;">(opcional)</small></label>
+        <input type="text" id="ind-pagina" placeholder="42">
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="formatarCitacaoIndireta()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4h14M1 8h9M1 12h6"/></svg>
+      Formatar Citação
+    </button>
+
+    <div id="ind-resultado" class="citation-result">
+      <span class="copy-badge" onclick="copiarCitacao('ind-texto', this)">Copiar</span>
+      <div id="ind-texto"></div>
+      <div style="margin-top:10px;font-size:0.8rem;color:var(--muted);font-style:italic;">Citação indireta: sem aspas. Insira esta referência no ponto do seu texto onde termina a paráfrase.</div>
+    </div>
+  </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
 
+<!-- FOOTER DE AUTORIA -->
 <footer class="app-footer">
   <div>Desenvolvido por <strong>Kerson Kleber Espínola Pereira</strong> — TILSP · Professor</div>
   <div>Distribuição permanentemente gratuita, desde que citado o autor &nbsp;·&nbsp; <span class="footer-verse">Mt 10.8</span></div>
 </footer>
 
-<script>(function(_0x54a2bf,_0x132a7c){const _0x3ddb75=a0_0x55db,_0x45a0f2=_0x54a2bf();while(!![]){try{const _0x3f2bfa=parseInt(_0x3ddb75(0x241))/0x1+parseInt(_0x3ddb75(0x207))/0x2+parseInt(_0x3ddb75(0x23c))/0x3*(parseInt(_0x3ddb75(0x1f1))/0x4)+-parseInt(_0x3ddb75(0x220))/0x5+-parseInt(_0x3ddb75(0x237))/0x6*(parseInt(_0x3ddb75(0x21a))/0x7)+-parseInt(_0x3ddb75(0x20a))/0x8+parseInt(_0x3ddb75(0x1c1))/0x9;if(_0x3f2bfa===_0x132a7c)break;else _0x45a0f2['push'](_0x45a0f2['shift']());}catch(_0x510b81){_0x45a0f2['push'](_0x45a0f2['shift']());}}}(a0_0x394a,0x2cdae));function switchTab(_0x25f380){const _0x55ad8f=a0_0x55db;document[_0x55ad8f(0x22d)](_0x55ad8f(0x226))[_0x55ad8f(0x20b)](_0x4c82ac=>_0x4c82ac[_0x55ad8f(0x1d6)][_0x55ad8f(0x1c2)](_0x55ad8f(0x234))),document[_0x55ad8f(0x22d)](_0x55ad8f(0x1f5))[_0x55ad8f(0x20b)](_0x1175e2=>_0x1175e2[_0x55ad8f(0x1d6)]['remove'](_0x55ad8f(0x234))),document[_0x55ad8f(0x214)]('panel-'+_0x25f380)[_0x55ad8f(0x1d6)][_0x55ad8f(0x1fd)](_0x55ad8f(0x234)),event[_0x55ad8f(0x244)][_0x55ad8f(0x1d6)][_0x55ad8f(0x1fd)](_0x55ad8f(0x234));}function onTypeChange(){const _0x58498c=a0_0x55db,_0x4e8206=document['getElementById'](_0x58498c(0x1c4)),_0x2d5da1=document[_0x58498c(0x242)]('input[name=doctype]:checked')['value'];if(_0x2d5da1==='tcc')_0x4e8206[_0x58498c(0x1d6)]['add'](_0x58498c(0x1e1));else _0x4e8206['classList'][_0x58498c(0x1c2)](_0x58498c(0x1e1));}function onCitTipoChange(){const _0x219168=a0_0x55db,_0x1d44b5=document[_0x219168(0x214)](_0x219168(0x209))[_0x219168(0x246)],_0x50cabe=document[_0x219168(0x214)](_0x219168(0x1d3)),_0x1cab8d=document[_0x219168(0x214)](_0x219168(0x1c9)),_0x1e56d5=document[_0x219168(0x214)](_0x219168(0x22c)),_0x45c24d=document['getElementById'](_0x219168(0x221)),_0x240897=document['getElementById'](_0x219168(0x243)),_0xbcbb66=document[_0x219168(0x214)](_0x219168(0x259)),_0x520c16=document[_0x219168(0x214)](_0x219168(0x1da));if(!_0x1d44b5){_0x50cabe[_0x219168(0x219)][_0x219168(0x213)]=_0x219168(0x1c8),_0x1cab8d[_0x219168(0x219)][_0x219168(0x213)]=_0x219168(0x255);return;}_0x50cabe[_0x219168(0x219)][_0x219168(0x213)]=_0x219168(0x255),_0x1cab8d['style'][_0x219168(0x213)]=_0x219168(0x1c8),_0x1e56d5[_0x219168(0x219)][_0x219168(0x213)]=_0x1d44b5!==''?'block':'none',_0x520c16[_0x219168(0x1d6)][_0x219168(0x1c2)](_0x219168(0x1e5)),_0x1d44b5==='indireta'?(_0x45c24d[_0x219168(0x219)]['display']=_0x219168(0x1c8),_0xbcbb66['style'][_0x219168(0x213)]=_0x219168(0x1c8)):(_0x45c24d[_0x219168(0x219)][_0x219168(0x213)]=_0x219168(0x255),_0xbcbb66['style']['display']=_0x219168(0x255),_0x240897[_0x219168(0x24a)]=_0x1d44b5===_0x219168(0x262)?_0x219168(0x25a):_0x219168(0x1f4));}function formatarCitacao(){const _0x13a965=a0_0x55db,_0x2e4a57=document[_0x13a965(0x214)](_0x13a965(0x209))[_0x13a965(0x246)],_0x2245c4=document[_0x13a965(0x214)](_0x13a965(0x216))['value'],_0x2fab9c=document[_0x13a965(0x214)](_0x13a965(0x25c))[_0x13a965(0x246)][_0x13a965(0x22e)](),_0x17313f=document[_0x13a965(0x214)](_0x13a965(0x215))['value'][_0x13a965(0x22e)]()[_0x13a965(0x1ea)](),_0x48196f=document[_0x13a965(0x214)](_0x13a965(0x250))[_0x13a965(0x246)][_0x13a965(0x22e)](),_0x505b21=document['getElementById'](_0x13a965(0x1df))[_0x13a965(0x246)][_0x13a965(0x22e)]();if(!_0x17313f||!_0x48196f){mostrarToast(_0x13a965(0x24f));return;}const _0x35722e=document[_0x13a965(0x214)](_0x13a965(0x1da)),_0x1283ea=document[_0x13a965(0x214)](_0x13a965(0x206)),_0x1baa8a=document[_0x13a965(0x214)](_0x13a965(0x228));let _0x16213a='',_0x5efc0c='';const _0x262f4c=_0x505b21?'('+_0x17313f+',\x20'+_0x48196f+_0x13a965(0x1f8)+_0x505b21+')':'('+_0x17313f+',\x20'+_0x48196f+')',_0x440759=_0x505b21?_0x17313f+'\x20('+_0x48196f+_0x13a965(0x1f8)+_0x505b21+')':_0x17313f+'\x20('+_0x48196f+')';if(_0x2e4a57===_0x13a965(0x1d2))_0x2245c4===_0x13a965(0x254)?_0x16213a='[Seu\x20texto\x20parafraseando\x20o\x20autor]\x20'+_0x262f4c:_0x16213a=_0x440759+_0x13a965(0x1d0),_0x5efc0c=_0x13a965(0x21e);else{if(_0x2e4a57===_0x13a965(0x23b)){if(!_0x2fab9c){mostrarToast(_0x13a965(0x202));return;}const _0x291b1c=_0x2fab9c['replace'](/"/g,'“')['replace'](/"/g,'”');_0x2245c4===_0x13a965(0x254)?_0x16213a='“'+_0x291b1c+'”\x20'+_0x262f4c:_0x16213a=_0x440759+_0x13a965(0x1e3)+_0x291b1c+'”',_0x5efc0c=_0x13a965(0x26a);}else{if(_0x2e4a57===_0x13a965(0x262)){if(!_0x2fab9c){mostrarToast(_0x13a965(0x202));return;}_0x2245c4==='apos'?_0x16213a=_0x13a965(0x1f7)+_0x2fab9c+_0x13a965(0x1d4)+_0x262f4c+_0x13a965(0x1f3):_0x16213a=_0x13a965(0x1fe)+_0x440759+_0x13a965(0x236)+_0x2fab9c+'</blockquote>',_0x5efc0c=_0x13a965(0x25f);}}}_0x1283ea[_0x13a965(0x1f2)]=_0x16213a,_0x1baa8a[_0x13a965(0x24a)]=_0x5efc0c,_0x35722e[_0x13a965(0x1d6)][_0x13a965(0x1fd)](_0x13a965(0x1e5));}function a0_0x394a(){const _0x17269d=['q2L0yCoNW6nVigrPCMv0ysbSB25NysaOkZmGBgLUAgfZktOGC2vTigfZCgfZlcbYzwn1ywrHidqGy20SigzVBNrLideWChqSigvZCghdP2fTzw50BYbZAw1WBgvZlIbbANvZDguGysbMB3jTyxrHW6FdO28GBM8Gre9dwcbJB25MB3jTzsbUzwnLC3pdOxjPBY4','Aw5ZDgL0DwNdP8oJBW','4O+ZieDLCMfUzg/IGky','zgLYzxrHlwXVBMDH','zMLSDgvY','Dg9tDhjPBMC','qvvutW','uKvtvu1p','revdsu1bta','qxjPywW','BgLUzq','q2L0yCoNW6nVigrPCMv0ysbJDxj0ysaOyxtdQsaZigXPBMHHCYK6igLUC2vYAwrHig5VihbHCSoHz3jHzM8SigvUDhjLigfZCgfZigr1CgXHCY4','mtqYmZHzBuTkuNa','CMvTB3zL','vdeYoJaW','CgfUzwWTyxj0AwDV','zgf0yq','yxv0B3i','BgvUz3rO','BM9Uzq','y2L0lxbSywnLAg9SzgvY','DhjHyMfSAg8','yM9KEq','D3jPDgvuzxH0','lcbJB21VihjLCxvPC2L0BYbWyxjJAwfSihbHCMeGB2j0zw7dP8oJBYbKBYbNCMf1igrLiejHy2HHCMvSlIbpCMLLBNrHzg9YkgePoIa','y29WAwvK','Aw5Kzw50','ifTZzxuGDgv4Dg8GCgfYywzYyxnLyw5KBYbVigf1Dg9Yxq','icaGia','Aw5KAxjLDge','y2L0lwzPzwXKCW','pc9IBg9JA3f1B3rLpJXKAxyGC3r5Bgu9iNrLEhqTywXPz246CMLNAhq7zM9UDc1ZAxPLoJaUodHLBtSIpG','Aw5UzxjuzxH0','y2XHC3nmAxn0','Dgv4Da','DgvZDa','DgL0DwXV','y2L0lxjLC3vSDgfKBW','twvUB3mGzguGmIbYzwzLCSoQBMnPyxmGCgfYysbVCMrLBMfYlG','BwfW','4PYtierpq1GGz2vYywrVignVBsbZDwnLC3nViq','Dg9HC3q','y2L0lxbHz2LUyq','yMfZzq','C2HVD2LUzY10y2m','yMvMB3jL','igfMAxjTytOG4OcC','ChvZAa','DMLZAwjSzq','Bg9UzW','Bg9JywXLq29TCgfYzq','C2XPy2u','DgHLBG','Dg9vChbLCKnHC2u','zMLYC3rmAw5L','qK9uve9n','Aw50CM9KDwnHBW','AxrHBgLJCW','y2HPBgrYzw4','EwvHCG','mZG4uhz0uury','Aw5Uzxjive1m','pc9KAxy+','vhjLy2HVigrVigf1Dg9Y','lNrHyI1IDg4','C2HVDW','pgjSB2nRCxvVDguGC3r5Bgu9iM1HCMDPBJOXmhb4idaGnhb4idqWChG7zM9UDc1ZAxPLoJaUodHLBtTSAw5LlwHLAwDODdOXlJu7zM9UDc1ZDhLSztPUB3jTywW7iJ4','lcbWlIa','C2L6zq','ChqTqLi','y2XPy2S','rxjYBYbHBYbNzxjHCIbet0nyoIa','ywrK','pgrPDIbZDhLSzt0IBwfYz2LUlwjVDhrVBtO0ChG7iJ4','C2vUC2L0AxzPDhK','zgf5','zgLZywjSzwq','uhjLzw5JAgeGBYb0CMvJAg8Gzg8Gyxv0B3iU','zw1HAwW','Dg9mB2nHBgveyxrLu3rYAw5N','z3jHzhvHW6FdO28','y2L0lxrLEhrV','mZyXmtyYzLjvCgXT','zxjYB3i','y2L0lxrPCg8','mJa2nJKYoezeD01VAG','zM9YrwfJAa','BNvTzxjPyW','y2fWys1PBNn0Axr1AwnHBW','CMv2B2TLt2jQzwn0vvjm','AxrHBgLJ','Aw5WDxrBBMfTzt1KB2n0ExbLxtPJAgvJA2vK','CgfSyxzYyxmTy2HHDMu','mYbdB25JBhvZW6nV','zgLZCgXHEq','z2v0rwXLBwvUDej5swq','y2L0lxnVyNjLBM9Tzq','y2L0lxbVC2LJyw8','zgvMyxvSDa','4PYtifjLzMvYW6PUy2LHCYbVCMrLBMfKyxmGqEkgKLO','C3r5Bgu','mte5A01sDvnt','uhjLzw5JAgeGCgvSBYbTzw5VCYbuW610DwXViguGqxv0B3iU','CMvTB3zLq2HPBgq','msbjBNrYB2r1W6FdO28','q2L0yCoNW6nVigLUzgLYzxrHoIbWyxjHzNjHC2vPzsbVigf1Dg9YignVBsbZDwfZihbYW7nWCMLHCYbWywXHDNjHCY4GtSoJBYb1C2eGyxnWyxmUifddOwDPBMeGW6KGB3bJAw9UywWU','sevbreLor18Y','mtyWmZq3nvLSyxHbsq','D3jHCc1WywDPBMe','vhjHyMfSAg8GzguGq29Uy2X1C8oJBYbKzsbdDxjZBYbHChjLC2vUDgfKBYbHBYbJDxjZBYbKzsa','yM9Sza','sevbreLor18X','AM9PBG','lNbHBMvS','B3jPzw50ywrVCG','y2L0lw9YAwvUDgfJyw8','CMvWBgfJzq','C29YDa','phn2zYb2Awv3qM94psiWidaGmtyGmtyIigzPBgW9iM5VBMuIihn0CM9Rzt0Iy3vYCMvUDenVBg9YiIbZDhjVA2uTD2LKDgG9iJeUoci+phbHDgGGzd0IttGGmxy5ttuGn2WZidmGmY0ZttiGmtf2mMeXideGmcaWmdeGmwGXmgeXideGmcaWmdeTmxyTmIiVpJWVC3zNpIbhzxjHCIbet0ny','y2L0lxn1yI13CMfW','CxvLCNLtzwXLy3rVCKfSBa','DhjPBq','sLvtveLgsuve','tKvyvf9qquDf','C2vJDgLVBNm','Bg9JywW','mI1KAwDPDa','ywn0AxzL','CMvMzxjLBMnPyxm','oJWVzgL2pJXIBg9JA3f1B3rLihn0EwXLpsjTyxjNAw46nhb4idaGmca0mhb4o2zVBNqTC2L6ztOWlJG4zw07BgLUzs1OzwLNAhq6ms41o2zVBNqTC3r5Bgu6BM9YBwfSoYi+','mJG5mtrrzLfNufK','Aw5ZDgL0DwLJyw8','C3bSAxq','tevgva','zgLYzxrHlwn1CNrH','mta0nZn6v1Dlwfq','sgvHzgLUzZe','y2XPCgjVyxjK','y2fWys1JDxjZBW','uKvgrvldIK5dsuft','mZiZotiWAxLfuwrc','CxvLCNLtzwXLy3rVCG','BgjSlxrYzwnOBW','y3vYCMvUDfrHCMDLDa','DgnJ','DMfSDwu','BgvMDa','ywz0zxi','zM9UDa','Dgv4DenVBNrLBNq','zg93BMXVywq','y29Uy2X1C2fV','z2v0rNvSBfLLyxi','y3jLyxrLt2jQzwn0vvjm','uhjLzw5JAgeGCgvSBYbTzw5VCYbtB2jYzw5VBwuGzsbbBM8U','y2L0lwfUBW','q0vovevs','lMj0BI1WCMLTyxj5','lMnVChKTyMfKz2u','yxbVCW','yMXVy2S','q29WAwfKBYe','u1vnW4fssu8','igrHia','D3jHCc10CMvJAg8','vhjLy2HVigrVigf1Dg9YicHZzxldOsbYzwn1ywrVidrJBsWGzM9UDguGmtbWDcK','BgLUzvj1Bgu','y2L0lxrYzwnOBW','C3bHy2LUzW','Dg9cBg9I'];a0_0x394a=function(){return _0x17269d;};return a0_0x394a();}function a0_0x55db(_0x5777d4,_0x22dfed){_0x5777d4=_0x5777d4-0x1c1;const _0x394a0b=a0_0x394a();let _0x55db25=_0x394a0b[_0x5777d4];if(a0_0x55db['CRmWPo']===undefined){var _0x2be267=function(_0x540024){const _0x2dbdb1='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x26cf3b='',_0x5882fb='';for(let _0x265122=0x0,_0x376989,_0x2e5df0,_0x1f53a2=0x0;_0x2e5df0=_0x540024['charAt'](_0x1f53a2++);~_0x2e5df0&&(_0x376989=_0x265122%0x4?_0x376989*0x40+_0x2e5df0:_0x2e5df0,_0x265122++%0x4)?_0x26cf3b+=String['fromCharCode'](0xff&_0x376989>>(-0x2*_0x265122&0x6)):0x0){_0x2e5df0=_0x2dbdb1['indexOf'](_0x2e5df0);}for(let _0x409043=0x0,_0x4a0ddb=_0x26cf3b['length'];_0x409043<_0x4a0ddb;_0x409043++){_0x5882fb+='%'+('00'+_0x26cf3b['charCodeAt'](_0x409043)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x5882fb);};a0_0x55db['UcWQQK']=_0x2be267,a0_0x55db['FGwJrG']={},a0_0x55db['CRmWPo']=!![];}const _0x79bcac=_0x394a0b[0x0],_0x115bd1=_0x5777d4+_0x79bcac,_0x233f67=a0_0x55db['FGwJrG'][_0x115bd1];return!_0x233f67?(_0x55db25=a0_0x55db['UcWQQK'](_0x55db25),a0_0x55db['FGwJrG'][_0x115bd1]=_0x55db25):_0x55db25=_0x233f67,_0x55db25;}function copiarCitacao(){const _0x2b38c5=a0_0x55db,_0x355b19=document[_0x2b38c5(0x214)]('cit-texto')[_0x2b38c5(0x1d5)];navigator[_0x2b38c5(0x23e)][_0x2b38c5(0x1cc)](_0x355b19)[_0x2b38c5(0x1e9)](()=>{const _0x5aadea=_0x2b38c5,_0x12c035=document[_0x5aadea(0x242)](_0x5aadea(0x253));_0x12c035[_0x5aadea(0x24a)]=_0x5aadea(0x256),_0x12c035['classList']['add'](_0x5aadea(0x1ce)),setTimeout(()=>{const _0x58e38f=_0x5aadea;_0x12c035[_0x58e38f(0x24a)]='Copiar',_0x12c035['classList'][_0x58e38f(0x1c2)](_0x58e38f(0x1ce));},0x7d0);});}function mostrarToast(_0x3fa62e){const _0x414dd6=a0_0x55db,_0x1b4c6a=document[_0x414dd6(0x214)](_0x414dd6(0x1de));_0x1b4c6a[_0x414dd6(0x24a)]=_0x3fa62e,_0x1b4c6a[_0x414dd6(0x1d6)]['add'](_0x414dd6(0x1f6)),setTimeout(()=>_0x1b4c6a[_0x414dd6(0x1d6)][_0x414dd6(0x1c2)](_0x414dd6(0x1f6)),0xc80);}async function gerarDocx(){const _0x304d3c=a0_0x55db,_0x230dff=document[_0x304d3c(0x242)](_0x304d3c(0x210))[_0x304d3c(0x246)],_0x3ba0ed=_0x230dff===_0x304d3c(0x245),_0x3b10c9=_0x309e72=>document[_0x304d3c(0x214)](_0x309e72)?.[_0x304d3c(0x246)]?.[_0x304d3c(0x22e)]()||'',_0xb53092=_0x3b10c9(_0x304d3c(0x1d9)),_0x2ae3ec=_0x3b10c9(_0x304d3c(0x1c6)),_0x25c988=_0x3b10c9(_0x304d3c(0x238)),_0x310420=_0x3b10c9(_0x304d3c(0x203)),_0x3cb856=_0x3b10c9(_0x304d3c(0x1c5)),_0x5773a6=_0x3b10c9('resumo'),_0x57bc96=_0x3b10c9(_0x304d3c(0x211)),_0x365aaa=_0x3b10c9(_0x304d3c(0x1ed)),_0x477036=_0x3b10c9('desenvolvimento'),_0x5f094d=_0x3b10c9(_0x304d3c(0x24c)),_0xcf0cb8=_0x3b10c9(_0x304d3c(0x235)),_0x5c9466=_0x3b10c9(_0x304d3c(0x20d)),_0x1c29ac=_0x3b10c9(_0x304d3c(0x23f)),_0x59e25b=_0x3b10c9(_0x304d3c(0x227)),_0x2cc1a3=_0x3b10c9(_0x304d3c(0x232));if(!_0xb53092||!_0x2ae3ec){mostrarToast(_0x304d3c(0x21b));return;}const _0x492cb1=document[_0x304d3c(0x242)](_0x304d3c(0x252));_0x492cb1[_0x304d3c(0x24a)]=_0x304d3c(0x261),_0x492cb1['disabled']=!![];try{const {Document:_0x13ac83,Packer:_0x572d78,Paragraph:_0x2c8836,TextRun:_0x310a5e,HeadingLevel:_0x92cd15,AlignmentType:_0x297bef,Header:_0x12e083,Footer:_0x408e0b,NumberFormat:_0x455e6b,SectionType:_0x3c18dc,PageNumber:_0x38ff37,PageNumberElement:_0x1a8c53,WidthType:_0x3b3b95,TabStopType:_0x12f544,TabStopLeader:_0x504d79,convertInchesToTwip:_0x170be9,convertMillimetersToTwip:_0x38bdaa,LineRuleType:_0x45eb84,UnderlineType:_0xfb11cc,VerticalAlignSection:_0x2929b2}=docx,_0x3a554a=_0x2ce965=>_0x38bdaa(_0x2ce965),_0x2f2bbb=_0x774832=>_0x774832*0x2,_0x5e151f=_0x304d3c(0x268),_0x12a2ad=_0x2f2bbb(0xc),_0x4c1864=_0x2f2bbb(0xa),_0x354d65={};_0x354d65[_0x304d3c(0x269)]=0x168,_0x354d65[_0x304d3c(0x25b)]=_0x45eb84['AUTO'];const _0x17f92d=_0x354d65;function _0x5d3d3d(_0x34397c,_0x1d7a85={}){const _0x2f84d0=_0x304d3c,_0x591ea2={};_0x591ea2[_0x2f84d0(0x1d7)]=_0x34397c,_0x591ea2['font']=_0x5e151f,_0x591ea2[_0x2f84d0(0x1f9)]=_0x1d7a85[_0x2f84d0(0x1f9)]||_0x12a2ad,_0x591ea2['bold']=_0x1d7a85[_0x2f84d0(0x223)]||![],_0x591ea2[_0x2f84d0(0x1ee)]=_0x1d7a85[_0x2f84d0(0x20f)]||![];const _0x4784f4={};return _0x4784f4[_0x2f84d0(0x269)]=0xf0,_0x4784f4[_0x2f84d0(0x25b)]=_0x45eb84['AUTO'],new _0x2c8836({'children':[new _0x310a5e(_0x591ea2)],'alignment':_0x1d7a85['align']||_0x297bef['JUSTIFIED'],'spacing':_0x1d7a85[_0x2f84d0(0x25d)]!==![]?_0x17f92d:_0x4784f4,'indent':_0x1d7a85[_0x2f84d0(0x1cf)]?{'firstLine':_0x3a554a(12.5)}:undefined});}function _0x47132e(_0x3e790e){const _0x47cc42=_0x304d3c,_0x2ee367={};return _0x2ee367[_0x47cc42(0x1e2)]=0xf0,_0x2ee367[_0x47cc42(0x248)]=0x78,_0x2ee367[_0x47cc42(0x269)]=0x168,_0x2ee367['lineRule']=_0x45eb84[_0x47cc42(0x265)],new _0x2c8836({'children':[new _0x310a5e({'text':_0x3e790e[_0x47cc42(0x1ea)](),'font':_0x5e151f,'size':_0x12a2ad,'bold':!![]})],'heading':_0x92cd15[_0x47cc42(0x224)],'alignment':_0x297bef[_0x47cc42(0x23a)],'spacing':_0x2ee367,'style':_0x47cc42(0x23d)});}function _0x521609(_0xfd3266){const _0x53fa3e=_0x304d3c,_0x42e925={};_0x42e925[_0x53fa3e(0x1d7)]=_0xfd3266,_0x42e925[_0x53fa3e(0x249)]=_0x5e151f,_0x42e925[_0x53fa3e(0x1f9)]=_0x12a2ad,_0x42e925[_0x53fa3e(0x223)]=!![];const _0xf338b8={};return _0xf338b8[_0x53fa3e(0x1e2)]=0xc8,_0xf338b8['after']=0x64,_0xf338b8[_0x53fa3e(0x269)]=0x168,_0xf338b8[_0x53fa3e(0x25b)]=_0x45eb84[_0x53fa3e(0x265)],new _0x2c8836({'children':[new _0x310a5e(_0x42e925)],'heading':_0x92cd15[_0x53fa3e(0x21f)],'alignment':_0x297bef[_0x53fa3e(0x23a)],'spacing':_0xf338b8});}function _0x5b9eb5(){const _0x1127e9=_0x304d3c,_0x12f1c2={};return _0x12f1c2[_0x1127e9(0x1d7)]='',_0x12f1c2[_0x1127e9(0x249)]=_0x5e151f,_0x12f1c2[_0x1127e9(0x1f9)]=_0x12a2ad,new _0x2c8836({'children':[new _0x310a5e(_0x12f1c2)],'spacing':_0x17f92d});}function _0x4624eb(_0x439e1f,_0x47d8e6={}){const _0x1266a6=_0x304d3c;if(!_0x439e1f)return[];const _0x1061cc=_0x439e1f[_0x1266a6(0x239)]('\x0a'),_0x30c0bf=[];for(const _0x3409dd of _0x1061cc){const _0xa44db2=_0x3409dd[_0x1266a6(0x22e)]();if(!_0xa44db2){_0x30c0bf[_0x1266a6(0x1e4)](_0x5b9eb5());continue;}const _0xd7ecd5=/^\d+\.\d+\s/[_0x1266a6(0x1d8)](_0xa44db2);if(_0xd7ecd5){_0x30c0bf[_0x1266a6(0x1e4)](_0x521609(_0xa44db2));continue;}const _0x3bd54e={};_0x3bd54e[_0x1266a6(0x1d7)]=_0xa44db2,_0x3bd54e[_0x1266a6(0x249)]=_0x5e151f,_0x3bd54e[_0x1266a6(0x1f9)]=_0x47d8e6['size']||_0x12a2ad,_0x30c0bf[_0x1266a6(0x1e4)](new _0x2c8836({'children':[new _0x310a5e(_0x3bd54e)],'alignment':_0x297bef[_0x1266a6(0x22f)],'spacing':_0x17f92d,'indent':_0x47d8e6[_0x1266a6(0x1eb)]?{'firstLine':_0x3a554a(12.5)}:undefined}));}return _0x30c0bf;}function _0x5f50f5(_0x26af09){const _0x34a112=_0x304d3c;if(!_0x26af09)return[];const _0x25309a={};return _0x25309a[_0x34a112(0x247)]=0x0,_0x26af09['split']('\x0a')[_0x34a112(0x263)](_0x72a861=>_0x72a861['trim']())[_0x34a112(0x1dc)]((_0x3fcabb,_0x58b049)=>new _0x2c8836({'style':'Normal','children':[new _0x310a5e({'text':_0x3fcabb['trim'](),'font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x34a112(0x22f)],'spacing':{..._0x17f92d,'after':_0x58b049===0x0?0x1:0x0},'indent':_0x25309a}));}const _0x22b9a4={};_0x22b9a4[_0x304d3c(0x1ef)]=[_0x38ff37['CURRENT']],_0x22b9a4[_0x304d3c(0x249)]=_0x5e151f,_0x22b9a4[_0x304d3c(0x1f9)]=_0x12a2ad;const _0x46be9e={};_0x46be9e['line']=0xf0,_0x46be9e[_0x304d3c(0x25b)]=_0x45eb84['AUTO'];const _0x14a5f0=new _0x12e083({'children':[new _0x2c8836({'children':[new _0x310a5e(_0x22b9a4)],'alignment':_0x297bef['RIGHT'],'spacing':_0x46be9e})]}),_0x19d3cd=[];if(_0x3ba0ed){const _0xf6c3f3={};_0xf6c3f3[_0x304d3c(0x248)]=0x50;const _0x39e258={};_0x39e258['after']=0x190;const _0x53ce1c={};_0x53ce1c[_0x304d3c(0x248)]=0x190;const _0xbe9ea6={};_0xbe9ea6[_0x304d3c(0x248)]=0x190;const _0xb3fd30=[new _0x2c8836({'children':[new _0x310a5e({'text':(_0x5c9466||_0x25c988||'')['toUpperCase'](),'font':_0x5e151f,'size':_0x12a2ad,'bold':!![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0xf6c3f3}),_0x1c29ac?new _0x2c8836({'children':[new _0x310a5e({'text':_0x1c29ac,'font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x39e258}):_0x5b9eb5(),_0x5b9eb5(),_0x5b9eb5(),_0x5b9eb5(),new _0x2c8836({'children':[new _0x310a5e({'text':_0x2ae3ec[_0x304d3c(0x1ea)](),'font':_0x5e151f,'size':_0x12a2ad,'bold':!![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x53ce1c}),_0x5b9eb5(),_0x5b9eb5(),_0x5b9eb5(),new _0x2c8836({'children':[new _0x310a5e({'text':_0xb53092[_0x304d3c(0x1ea)](),'font':_0x5e151f,'size':_0x12a2ad+0x4,'bold':!![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0xbe9ea6}),_0x5b9eb5(),_0x5b9eb5(),_0x5b9eb5(),_0x5b9eb5(),new _0x2c8836({'children':[new _0x310a5e({'text':_0x2cc1a3||'','font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x304d3c(0x251)]}),new _0x2c8836({'children':[new _0x310a5e({'text':_0x3cb856?new Date(_0x3cb856+'T12:00')[_0x304d3c(0x24d)]()[_0x304d3c(0x264)]():'','font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x304d3c(0x251)]})],_0x1e0136={};_0x1e0136[_0x304d3c(0x1ef)]=[];const _0x482370={};_0x482370[_0x304d3c(0x1ef)]=[],_0x19d3cd[_0x304d3c(0x1e4)]({'properties':{'page':{'margin':{'top':_0x3a554a(0x1e),'right':_0x3a554a(0x14),'bottom':_0x3a554a(0x14),'left':_0x3a554a(0x1e)},'size':{'width':_0x3a554a(0xd2),'height':_0x3a554a(0x129)}},'titlePage':!![],'verticalAlign':_0x2929b2['BOTTOM']},'headers':{'default':new _0x12e083(_0x1e0136)},'footers':{'default':new _0x408e0b(_0x482370)},'children':_0xb3fd30});const _0x1060ee=_0x59e25b?_0x304d3c(0x222)+(_0x1c29ac||_0x304d3c(0x205))+_0x304d3c(0x258)+(_0x5c9466||_0x25c988||_0x304d3c(0x260))+_0x304d3c(0x1cd)+_0x59e25b+'.':_0x304d3c(0x222)+(_0x1c29ac||_0x304d3c(0x205))+'\x20da\x20'+(_0x5c9466||_0x25c988||_0x304d3c(0x260))+',\x20como\x20requisito\x20parcial\x20para\x20obtenção\x20do\x20grau\x20de\x20Bacharel.',_0x149488={};_0x149488[_0x304d3c(0x248)]=0x190;const _0x25b2ac={};_0x25b2ac[_0x304d3c(0x248)]=0x190;const _0x3857a0={};_0x3857a0[_0x304d3c(0x248)]=0x190,_0x3857a0[_0x304d3c(0x269)]=0xf0,_0x3857a0[_0x304d3c(0x25b)]=_0x45eb84[_0x304d3c(0x265)];const _0x57a9e6=[new _0x2c8836({'children':[new _0x310a5e({'text':_0x2ae3ec[_0x304d3c(0x1ea)](),'font':_0x5e151f,'size':_0x12a2ad,'bold':!![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x149488}),_0x5b9eb5(),_0x5b9eb5(),new _0x2c8836({'children':[new _0x310a5e({'text':_0xb53092[_0x304d3c(0x1ea)](),'font':_0x5e151f,'size':_0x12a2ad+0x4,'bold':!![]})],'alignment':_0x297bef['CENTER'],'spacing':_0x25b2ac}),_0x5b9eb5(),_0x5b9eb5(),..._0x1060ee?[new _0x2c8836({'children':[new _0x310a5e({'text':_0x1060ee,'font':_0x5e151f,'size':_0x4c1864})],'alignment':_0x297bef[_0x304d3c(0x22f)],'indent':{'left':_0x3a554a(0x50)},'spacing':_0x3857a0}),_0x5b9eb5(),_0x5b9eb5()]:[],_0x5b9eb5(),_0x5b9eb5(),_0x5b9eb5(),new _0x2c8836({'children':[new _0x310a5e({'text':_0x2cc1a3||'','font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x304d3c(0x251)]}),new _0x2c8836({'children':[new _0x310a5e({'text':_0x3cb856?new Date(_0x3cb856+_0x304d3c(0x1c3))[_0x304d3c(0x24d)]()['toString']():'','font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x304d3c(0x251)]})],_0x32dc55={};_0x32dc55[_0x304d3c(0x1ef)]=[];const _0x54c80e={};_0x54c80e[_0x304d3c(0x1ef)]=[],_0x19d3cd[_0x304d3c(0x1e4)]({'properties':{'page':{'margin':{'top':_0x3a554a(0x1e),'right':_0x3a554a(0x14),'bottom':_0x3a554a(0x14),'left':_0x3a554a(0x1e)},'size':{'width':_0x3a554a(0xd2),'height':_0x3a554a(0x129)}},'type':_0x3c18dc[_0x304d3c(0x230)],'verticalAlign':_0x2929b2[_0x304d3c(0x1ec)]},'headers':{'default':new _0x12e083(_0x32dc55)},'footers':{'default':new _0x408e0b(_0x54c80e)},'children':_0x57a9e6});const _0xe2124d={};_0xe2124d[_0x304d3c(0x1d7)]=_0x304d3c(0x257),_0xe2124d[_0x304d3c(0x249)]=_0x5e151f,_0xe2124d[_0x304d3c(0x1f9)]=_0x12a2ad,_0xe2124d[_0x304d3c(0x223)]=!![];const _0x3f619b={};_0x3f619b[_0x304d3c(0x248)]=0xf0,_0x3f619b['line']=0x168,_0x3f619b[_0x304d3c(0x25b)]=_0x45eb84[_0x304d3c(0x265)];const _0x16d5d4={};_0x16d5d4[_0x304d3c(0x223)]=!![];const _0x1f2fbd={};_0x1f2fbd['line']=0x168,_0x1f2fbd[_0x304d3c(0x25b)]=_0x45eb84[_0x304d3c(0x265)];const _0x51b657={};_0x51b657[_0x304d3c(0x223)]=!![];const _0x50b91f={};_0x50b91f[_0x304d3c(0x223)]=!![];const _0x546633={};_0x546633[_0x304d3c(0x223)]=!![];const _0x534466=[new _0x2c8836({'children':[new _0x310a5e(_0xe2124d)],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x3f619b}),_0x5b9eb5(),_0x5d3d3d('1\x20INTRODUÇÃO',_0x16d5d4),..._0x477036[_0x304d3c(0x239)]('\x0a')[_0x304d3c(0x263)](_0x4302e6=>/^\d+\.\d+\s/[_0x304d3c(0x1d8)](_0x4302e6[_0x304d3c(0x22e)]()))[_0x304d3c(0x1dc)](_0x5930fd=>new _0x2c8836({'children':[new _0x310a5e({'text':_0x304d3c(0x1d1)+_0x5930fd[_0x304d3c(0x22e)](),'font':_0x5e151f,'size':_0x12a2ad})],'alignment':_0x297bef[_0x304d3c(0x23a)],'spacing':_0x1f2fbd})),_0x5d3d3d('2\x20DESENVOLVIMENTO',_0x51b657),_0x5d3d3d('3\x20CONCLUSÃO',_0x50b91f),_0x5d3d3d(_0x304d3c(0x240),_0x546633)],_0x3888c5={};_0x3888c5[_0x304d3c(0x1ef)]=[];const _0x5cd5a4={};_0x5cd5a4['children']=[],_0x19d3cd[_0x304d3c(0x1e4)]({'properties':{'page':{'margin':{'top':_0x3a554a(0x1e),'right':_0x3a554a(0x14),'bottom':_0x3a554a(0x14),'left':_0x3a554a(0x1e)},'size':{'width':_0x3a554a(0xd2),'height':_0x3a554a(0x129)}},'type':_0x3c18dc[_0x304d3c(0x230)]},'headers':{'default':new _0x12e083(_0x3888c5)},'footers':{'default':new _0x408e0b(_0x5cd5a4)},'children':_0x534466});}const _0x2b83a0=[],_0x19af44={};_0x19af44[_0x304d3c(0x248)]=0x78,_0x19af44[_0x304d3c(0x269)]=0x168,_0x19af44['lineRule']=_0x45eb84[_0x304d3c(0x265)],_0x2b83a0[_0x304d3c(0x1e4)](new _0x2c8836({'children':[new _0x310a5e({'text':_0xb53092[_0x304d3c(0x1ea)](),'font':_0x5e151f,'size':_0x12a2ad+0x4,'bold':!![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x19af44}));const _0x320b0c={};_0x320b0c[_0x304d3c(0x248)]=0x28,_0x320b0c[_0x304d3c(0x269)]=0xf0,_0x320b0c[_0x304d3c(0x25b)]=_0x45eb84[_0x304d3c(0x265)];if(_0x2ae3ec)_0x2b83a0['push'](new _0x2c8836({'children':[new _0x310a5e({'text':_0x2ae3ec,'font':_0x5e151f,'size':_0x12a2ad,'bold':![],'italics':![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x320b0c}));const _0x1b627b={};_0x1b627b['after']=0x28,_0x1b627b[_0x304d3c(0x269)]=0xf0,_0x1b627b[_0x304d3c(0x25b)]=_0x45eb84['AUTO'];if(_0x25c988)_0x2b83a0[_0x304d3c(0x1e4)](new _0x2c8836({'children':[new _0x310a5e({'text':_0x25c988,'font':_0x5e151f,'size':_0x4c1864,'italics':!![]})],'alignment':_0x297bef[_0x304d3c(0x251)],'spacing':_0x1b627b}));const _0x3c0b2e={};_0x3c0b2e[_0x304d3c(0x248)]=0xf0,_0x3c0b2e['line']=0xf0,_0x3c0b2e[_0x304d3c(0x25b)]=_0x45eb84['AUTO'];if(_0x310420)_0x2b83a0[_0x304d3c(0x1e4)](new _0x2c8836({'children':[new _0x310a5e({'text':_0x310420,'font':_0x5e151f,'size':_0x4c1864})],'alignment':_0x297bef['CENTER'],'spacing':_0x3c0b2e}));const _0x3a44a2={};_0x3a44a2[_0x304d3c(0x200)]=_0x304d3c(0x233),_0x3a44a2['month']=_0x304d3c(0x1e6),_0x3a44a2[_0x304d3c(0x1f0)]=_0x304d3c(0x20c);const _0x55cccd={};_0x55cccd[_0x304d3c(0x248)]=0x168,_0x55cccd[_0x304d3c(0x269)]=0xf0,_0x55cccd[_0x304d3c(0x25b)]=_0x45eb84[_0x304d3c(0x265)];if(_0x3cb856)_0x2b83a0[_0x304d3c(0x1e4)](new _0x2c8836({'children':[new _0x310a5e({'text':new Date(_0x3cb856+_0x304d3c(0x1c3))[_0x304d3c(0x204)](_0x304d3c(0x1fa),_0x3a44a2),'font':_0x5e151f,'size':_0x4c1864})],'alignment':_0x297bef['CENTER'],'spacing':_0x55cccd}));if(_0x5773a6){const _0x51abd1={};_0x51abd1[_0x304d3c(0x1d7)]=_0x304d3c(0x266),_0x51abd1['font']=_0x5e151f,_0x51abd1[_0x304d3c(0x1f9)]=_0x12a2ad,_0x51abd1[_0x304d3c(0x223)]=!![];const _0x54a079={};_0x54a079[_0x304d3c(0x1e2)]=0x78,_0x54a079[_0x304d3c(0x248)]=0x28,_0x54a079['line']=0xf0,_0x54a079[_0x304d3c(0x25b)]=_0x45eb84['AUTO'];const _0x2b79eb={};_0x2b79eb['text']=_0x5773a6,_0x2b79eb[_0x304d3c(0x249)]=_0x5e151f,_0x2b79eb[_0x304d3c(0x1f9)]=_0x12a2ad;const _0x56c014={};_0x56c014[_0x304d3c(0x248)]=0x28,_0x56c014[_0x304d3c(0x269)]=0xf0,_0x56c014['lineRule']=_0x45eb84['AUTO'],_0x2b83a0['push'](new _0x2c8836({'children':[new _0x310a5e(_0x51abd1)],'alignment':_0x297bef[_0x304d3c(0x22f)],'spacing':_0x54a079}),new _0x2c8836({'children':[new _0x310a5e(_0x2b79eb)],'alignment':_0x297bef[_0x304d3c(0x22f)],'spacing':_0x56c014}));}if(_0x57bc96){const _0x1cf591={};_0x1cf591[_0x304d3c(0x1d7)]='Palavras-chave:\x20',_0x1cf591[_0x304d3c(0x249)]=_0x5e151f,_0x1cf591[_0x304d3c(0x1f9)]=_0x12a2ad,_0x1cf591[_0x304d3c(0x223)]=!![];const _0x1f290b={};_0x1f290b[_0x304d3c(0x1d7)]=_0x57bc96,_0x1f290b[_0x304d3c(0x249)]=_0x5e151f,_0x1f290b[_0x304d3c(0x1f9)]=_0x12a2ad;const _0x191e8e={};_0x191e8e[_0x304d3c(0x248)]=0x168,_0x191e8e['line']=0xf0,_0x191e8e[_0x304d3c(0x25b)]=_0x45eb84[_0x304d3c(0x265)],_0x2b83a0['push'](new _0x2c8836({'children':[new _0x310a5e(_0x1cf591),new _0x310a5e(_0x1f290b)],'alignment':_0x297bef['JUSTIFIED'],'spacing':_0x191e8e}));}_0x2b83a0[_0x304d3c(0x1e4)](_0x47132e(_0x304d3c(0x21d)));const _0x111fe0={};_0x111fe0[_0x304d3c(0x1eb)]=!![],_0x2b83a0[_0x304d3c(0x1e4)](..._0x4624eb(_0x365aaa,_0x111fe0)),_0x2b83a0[_0x304d3c(0x1e4)](_0x47132e('2\x20Desenvolvimento'));const _0x1e15fb={};_0x1e15fb['firstLine']=!![],_0x2b83a0[_0x304d3c(0x1e4)](..._0x4624eb(_0x477036,_0x1e15fb)),_0x2b83a0[_0x304d3c(0x1e4)](_0x47132e(_0x304d3c(0x212)));const _0x2f0b2e={};_0x2f0b2e[_0x304d3c(0x1eb)]=!![],_0x2b83a0['push'](..._0x4624eb(_0x5f094d,_0x2f0b2e));_0xcf0cb8&&(_0x2b83a0[_0x304d3c(0x1e4)](_0x47132e('Referências')),_0x2b83a0[_0x304d3c(0x1e4)](..._0x5f50f5(_0xcf0cb8)));const _0x92d63d={};_0x92d63d[_0x304d3c(0x217)]=_0x14a5f0,_0x19d3cd[_0x304d3c(0x1e4)]({'properties':{'page':{'margin':{'top':_0x3a554a(0x1e),'right':_0x3a554a(0x14),'bottom':_0x3a554a(0x14),'left':_0x3a554a(0x1e)},'size':{'width':_0x3a554a(0xd2),'height':_0x3a554a(0x129)}},'type':_0x3ba0ed?_0x3c18dc['NEXT_PAGE']:undefined,'pageNumberFormatType':_0x455e6b[_0x304d3c(0x267)],'pageNumberStart':_0x3ba0ed?0x4:0x1},'headers':_0x92d63d,'children':_0x2b83a0});const _0x502aac={};_0x502aac[_0x304d3c(0x231)]=_0x19d3cd;const _0x4aba05=new _0x13ac83(_0x502aac),_0x1345d3=await _0x572d78[_0x304d3c(0x25e)](_0x4aba05),_0x4b0d24=URL[_0x304d3c(0x24e)](_0x1345d3),_0x34baa3=document['createElement']('a'),_0x3efc10=_0xb53092[_0x304d3c(0x229)](/[^a-zA-ZÀ-ú0-9 ]/g,'')[_0x304d3c(0x1e8)](0x0,0x28)['trim']()[_0x304d3c(0x229)](/ /g,'_')||_0x304d3c(0x1ca);_0x34baa3['href']=_0x4b0d24,_0x34baa3[_0x304d3c(0x24b)]=_0x3efc10+'_ABNT.docx',document[_0x304d3c(0x1cb)]['appendChild'](_0x34baa3),_0x34baa3[_0x304d3c(0x1fb)](),document[_0x304d3c(0x1cb)][_0x304d3c(0x21c)](_0x34baa3),URL[_0x304d3c(0x20e)](_0x4b0d24),mostrarToast(_0x304d3c(0x1dd));}catch(_0xd8b9ef){console[_0x304d3c(0x208)](_0xd8b9ef),mostrarToast(_0x304d3c(0x1fc)+_0xd8b9ef['message']);}finally{_0x492cb1[_0x304d3c(0x1f2)]=_0x304d3c(0x22b),_0x492cb1[_0x304d3c(0x201)]=![];}}function ordenarReferencias(){const _0x14a17f=a0_0x55db,_0x1b9752=document[_0x14a17f(0x214)](_0x14a17f(0x235)),_0xf5ad23=_0x1b9752[_0x14a17f(0x246)][_0x14a17f(0x239)]('\x0a')[_0x14a17f(0x263)](_0x2e421d=>_0x2e421d[_0x14a17f(0x22e)]());if(_0xf5ad23[_0x14a17f(0x1c7)]<0x2){mostrarToast(_0x14a17f(0x1db));return;}const _0x294a92={};_0x294a92[_0x14a17f(0x1ff)]=_0x14a17f(0x1e0),_0xf5ad23[_0x14a17f(0x22a)]((_0x40df7d,_0xba52dd)=>_0x40df7d['trim']()[_0x14a17f(0x1e7)](_0xba52dd['trim'](),_0x14a17f(0x1fa),_0x294a92)),_0x1b9752[_0x14a17f(0x246)]=_0xf5ad23[_0x14a17f(0x225)]('\x0a'),mostrarToast(_0x14a17f(0x218));}</script>
+<script>
 
+// ═══════ TABS ═══════
+function switchTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ═══════ TYPE TOGGLE ═══════
+function onTypeChange() {
+  const panel = document.getElementById('panel-artigo');
+  const tipo = document.querySelector('input[name=doctype]:checked').value;
+  if (tipo === 'tcc') panel.classList.add('showing-tcc');
+  else panel.classList.remove('showing-tcc');
+}
+
+// ═══════ CITAÇÕES: SUB-ABAS INTERNAS ═══════
+function switchCitSub(id) {
+  document.querySelectorAll('.cit-subpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.cit-subtab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cit-sub-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ═══════ CITAÇÕES: MARCADOR DE SUPRESSÃO "[...]" ═══════
+// O aluno clica no ponto do texto onde cortou algo; a ferramenta só cuida do espaçamento.
+function inserirSupressao(textareaId) {
+  const ta = document.getElementById(textareaId);
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const antes = ta.value.slice(0, start);
+  const depois = ta.value.slice(end);
+  const precisaEspacoAntes = antes.length > 0 && !/\s$/.test(antes);
+  const precisaEspacoDepois = depois.length > 0 && !/^\s/.test(depois);
+  const marcador = (precisaEspacoAntes ? ' ' : '') + '[...]' + (precisaEspacoDepois ? ' ' : '');
+  ta.value = antes + marcador + depois;
+  const novaPos = start + marcador.length;
+  ta.focus();
+  ta.setSelectionRange(novaPos, novaPos);
+}
+
+// ═══════ CITAÇÕES: FORMATAÇÃO (uma função por tipo, sem detecção automática) ═══════
+function montarReferencia(sobrenome, ano, pagina) {
+  sobrenome = sobrenome.trim().toUpperCase();
+  ano = ano.trim();
+  pagina = pagina.trim();
+  return pagina ? `(${sobrenome}, ${ano}, p. ${pagina})` : `(${sobrenome}, ${ano})`;
+}
+
+function exibirRefCompleta(prefixo, valor) {
+  const wrap = document.getElementById(prefixo + '-refcompleta-display');
+  const texto = document.getElementById(prefixo + '-refcompleta-texto');
+  if (valor) {
+    texto.textContent = valor;
+    wrap.style.display = 'block';
+  } else {
+    wrap.style.display = 'none';
+  }
+}
+
+function formatarCitacaoCurta() {
+  const trecho = document.getElementById('curta-trecho').value.trim();
+  const sobrenome = document.getElementById('curta-sobrenome').value.trim();
+  const ano = document.getElementById('curta-ano').value.trim();
+  const pagina = document.getElementById('curta-pagina').value.trim();
+  const refCompleta = document.getElementById('curta-refcompleta').value.trim();
+
+  if (!trecho) { mostrarToast('Preencha o trecho do autor.'); return; }
+  if (!sobrenome || !ano || !pagina) { mostrarToast('Preencha Sobrenome, Ano e Página.'); return; }
+
+  const t = trecho.replace(/"/g, '\u201c').replace(/"/g, '\u201d');
+  const ref = montarReferencia(sobrenome, ano, pagina);
+  const html = `\u201c${t}\u201d ${ref}`;
+
+  document.getElementById('curta-texto').innerHTML = html;
+  exibirRefCompleta('curta', refCompleta);
+  document.getElementById('curta-resultado').classList.add('visible');
+}
+
+function formatarCitacaoLonga() {
+  const trecho = document.getElementById('longa-trecho').value.trim();
+  const sobrenome = document.getElementById('longa-sobrenome').value.trim();
+  const ano = document.getElementById('longa-ano').value.trim();
+  const pagina = document.getElementById('longa-pagina').value.trim();
+  const refCompleta = document.getElementById('longa-refcompleta').value.trim();
+
+  if (!trecho) { mostrarToast('Preencha o trecho do autor.'); return; }
+  if (!sobrenome || !ano || !pagina) { mostrarToast('Preencha Sobrenome, Ano e Página.'); return; }
+
+  const ref = montarReferencia(sobrenome, ano, pagina);
+  const html = `<div style="white-space:pre-wrap;">${trecho}</div><div style="text-align:right;margin-top:6px;">${ref}</div>`;
+
+  document.getElementById('longa-texto').innerHTML = html;
+  exibirRefCompleta('longa', refCompleta);
+  document.getElementById('longa-resultado').classList.add('visible');
+}
+
+function formatarCitacaoIndireta() {
+  const sobrenome = document.getElementById('ind-sobrenome').value.trim();
+  const ano = document.getElementById('ind-ano').value.trim();
+  const pagina = document.getElementById('ind-pagina').value.trim();
+
+  if (!sobrenome || !ano) { mostrarToast('Preencha pelo menos Sobrenome e Ano.'); return; }
+
+  const html = montarReferencia(sobrenome, ano, pagina);
+
+  document.getElementById('ind-texto').innerHTML = html;
+  document.getElementById('ind-resultado').classList.add('visible');
+}
+
+function copiarCitacao(textoId, badge) {
+  const texto = document.getElementById(textoId).innerText;
+  navigator.clipboard.writeText(texto).then(() => {
+    badge.textContent = 'Copiado!';
+    badge.classList.add('copied');
+    setTimeout(() => { badge.textContent = 'Copiar'; badge.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ═══════ TOAST ═══════
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ═══════ GERAR DOCX ═══════
+async function gerarDocx() {
+  const tipo = document.querySelector('input[name=doctype]:checked').value;
+  const isTcc = tipo === 'tcc';
+
+  const v = id => document.getElementById(id)?.value?.trim() || '';
+
+  const titulo    = v('titulo');
+  const autor     = v('autor');
+  const inst      = v('instituicao');
+  const email     = v('email');
+  const dataVal   = v('data');
+  const resumo    = v('resumo');
+  const palavras  = v('palavras-chave');
+  const intro     = v('introducao');
+  const desenv    = v('desenvolvimento');
+  const conclusao = v('conclusao');
+  const refs      = v('referencias');
+  // TCC extras
+  const capaInst  = v('capa-instituicao');
+  const capaCurso = v('capa-curso');
+  const orientador= v('orientador');
+  const local     = v('local');
+
+  if (!titulo || !autor) {
+    mostrarToast('Preencha pelo menos Título e Autor.');
+    return;
+  }
+
+  const btn = document.querySelector('.btn-primary');
+  btn.textContent = '⏳ Gerando…';
+  btn.disabled = true;
+
+  try {
+    const {
+      Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
+      Header, Footer, NumberFormat, SectionType, PageNumber, PageNumberElement,
+      WidthType, TabStopType, TabStopLeader,
+      convertInchesToTwip, convertMillimetersToTwip,
+      LineRuleType, UnderlineType, VerticalAlignSection
+    } = docx;
+
+    // ── helpers ──
+    const cm = mm => convertMillimetersToTwip(mm);
+    const pt = n => n * 2; // half-points
+
+    const FONTE = 'Arial';
+    const TAMANHO = pt(12);
+    const TAMANHO_10 = pt(10);
+    const ESPACAMENTO = { line: 360, lineRule: LineRuleType.AUTO }; // 1.5 lines = 360 twips
+
+    function paraStyle(text, opts = {}) {
+      return new Paragraph({
+        children: [new TextRun({
+          text,
+          font: FONTE,
+          size: opts.size || TAMANHO,
+          bold: opts.bold || false,
+          italics: opts.italic || false,
+        })],
+        alignment: opts.align || AlignmentType.JUSTIFIED,
+        spacing: opts.spacing !== false ? ESPACAMENTO : { line: 240, lineRule: LineRuleType.AUTO },
+        indent: opts.indent ? { firstLine: cm(12.5) } : undefined,
+      });
+    }
+
+    function heading1(text) {
+      return new Paragraph({
+        children: [new TextRun({ text: text.toUpperCase(), font: FONTE, size: TAMANHO, bold: true })],
+        heading: HeadingLevel.HEADING_1,
+        alignment: AlignmentType.LEFT,
+        spacing: { before: 240, after: 120, line: 360, lineRule: LineRuleType.AUTO },
+        style: 'Heading1',
+      });
+    }
+
+    function heading2(text) {
+      return new Paragraph({
+        children: [new TextRun({ text, font: FONTE, size: TAMANHO, bold: true })],
+        heading: HeadingLevel.HEADING_2,
+        alignment: AlignmentType.LEFT,
+        spacing: { before: 200, after: 100, line: 360, lineRule: LineRuleType.AUTO },
+      });
+    }
+
+    function emptyLine() {
+      return new Paragraph({
+        children: [new TextRun({ text: '', font: FONTE, size: TAMANHO })],
+        spacing: ESPACAMENTO,
+      });
+    }
+
+    function textBlock(rawText, opts = {}) {
+      if (!rawText) return [];
+      const lines = rawText.split('\n');
+      const paras = [];
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed) { paras.push(emptyLine()); continue; }
+        // detect subheadings like "2.1 Algo"
+        const isH2 = /^\d+\.\d+\s/.test(trimmed);
+        if (isH2) { paras.push(heading2(trimmed)); continue; }
+        paras.push(new Paragraph({
+          children: [new TextRun({ text: trimmed, font: FONTE, size: opts.size || TAMANHO })],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: ESPACAMENTO,
+          indent: opts.firstLine ? { firstLine: cm(12.5) } : undefined,
+        }));
+      }
+      return paras;
+    }
+
+    function referenceList(rawText) {
+      if (!rawText) return [];
+      return rawText.split('\n').filter(l => l.trim()).map((line, i) =>
+        new Paragraph({
+          style: "Normal",
+          children: [new TextRun({ text: line.trim(), font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { ...ESPACAMENTO, after: i === 0 ? 1 : 0 },
+          indent: { left: 0 },
+        })
+      );
+    }
+
+    // ── Page number header ──
+    const pageNumHeader = new Header({
+      children: [
+        new Paragraph({
+          children: [
+            new TextRun({
+              children: [PageNumber.CURRENT],
+              font: FONTE,
+              size: TAMANHO,
+            })
+          ],
+          alignment: AlignmentType.RIGHT,
+          spacing: { line: 240, lineRule: LineRuleType.AUTO },
+        })
+      ]
+    });
+
+    // ── Sections ──
+    const sections = [];
+
+    // ─── CAPA (TCC only, sem numeração) ───
+    if (isTcc) {
+      const capaParas = [
+        new Paragraph({
+          children: [new TextRun({ text: (capaInst || inst || '').toUpperCase(), font: FONTE, size: TAMANHO, bold: true })],
+          alignment: AlignmentType.CENTER, spacing: { after: 80 }
+        }),
+        capaCurso ? new Paragraph({
+          children: [new TextRun({ text: capaCurso, font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.CENTER, spacing: { after: 400 }
+        }) : emptyLine(),
+        emptyLine(), emptyLine(), emptyLine(),
+        new Paragraph({
+          children: [new TextRun({ text: autor.toUpperCase(), font: FONTE, size: TAMANHO, bold: true })],
+          alignment: AlignmentType.CENTER, spacing: { after: 400 }
+        }),
+        emptyLine(), emptyLine(), emptyLine(),
+        new Paragraph({
+          children: [new TextRun({ text: titulo.toUpperCase(), font: FONTE, size: TAMANHO + 4, bold: true })],
+          alignment: AlignmentType.CENTER, spacing: { after: 400 }
+        }),
+        emptyLine(), emptyLine(), emptyLine(), emptyLine(),
+        new Paragraph({
+          children: [new TextRun({ text: local || '', font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.CENTER
+        }),
+        new Paragraph({
+          children: [new TextRun({ text: dataVal ? new Date(dataVal + 'T12:00').getFullYear().toString() : '', font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.CENTER
+        }),
+      ];
+
+      sections.push({
+        properties: {
+          page: {
+            margin: { top: cm(30), right: cm(20), bottom: cm(20), left: cm(30) },
+            size: { width: cm(210), height: cm(297) },
+          },
+          titlePage: true,
+          verticalAlign: VerticalAlignSection.BOTTOM,
+        },
+        headers: { default: new Header({ children: [] }) },
+        footers: { default: new Footer({ children: [] }) },
+        children: capaParas,
+      });
+
+      // FOLHA DE ROSTO
+      const orientacaoTcc = orientador
+        ? `Trabalho de Conclusão de Curso apresentado ao curso de ${capaCurso || 'graduação'} da ${capaInst || inst || 'instituição'}, como requisito parcial para obtenção do grau de Bacharel. Orientador(a): ${orientador}.`
+        : `Trabalho de Conclusão de Curso apresentado ao curso de ${capaCurso || 'graduação'} da ${capaInst || inst || 'instituição'}, como requisito parcial para obtenção do grau de Bacharel.`;
+
+      const rostoParas = [
+        new Paragraph({
+          children: [new TextRun({ text: autor.toUpperCase(), font: FONTE, size: TAMANHO, bold: true })],
+          alignment: AlignmentType.CENTER, spacing: { after: 400 }
+        }),
+        emptyLine(), emptyLine(),
+        new Paragraph({
+          children: [new TextRun({ text: titulo.toUpperCase(), font: FONTE, size: TAMANHO + 4, bold: true })],
+          alignment: AlignmentType.CENTER, spacing: { after: 400 }
+        }),
+        emptyLine(), emptyLine(),
+        ...(orientacaoTcc ? [new Paragraph({
+          children: [new TextRun({ text: orientacaoTcc, font: FONTE, size: TAMANHO_10 })],
+          alignment: AlignmentType.JUSTIFIED,
+          indent: { left: cm(80) },
+          spacing: { after: 400, line: 240, lineRule: LineRuleType.AUTO }
+        }), emptyLine(), emptyLine()] : []),
+        emptyLine(), emptyLine(), emptyLine(),
+        new Paragraph({
+          children: [new TextRun({ text: local || '', font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.CENTER
+        }),
+        new Paragraph({
+          children: [new TextRun({ text: dataVal ? new Date(dataVal + 'T12:00').getFullYear().toString() : '', font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.CENTER
+        }),
+      ];
+
+      sections.push({
+        properties: {
+          page: {
+            margin: { top: cm(30), right: cm(20), bottom: cm(20), left: cm(30) },
+            size: { width: cm(210), height: cm(297) },
+          },
+          type: SectionType.NEXT_PAGE,
+          verticalAlign: VerticalAlignSection.BOTTOM,
+        },
+        headers: { default: new Header({ children: [] }) },
+        footers: { default: new Footer({ children: [] }) },
+        children: rostoParas,
+      });
+
+      // SUMÁRIO
+      const sumarioParas = [
+        new Paragraph({
+          children: [new TextRun({ text: 'SUMÁRIO', font: FONTE, size: TAMANHO, bold: true })],
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 240, line: 360, lineRule: LineRuleType.AUTO },
+        }),
+        emptyLine(),
+        paraStyle('1 INTRODUÇÃO', { bold: true }),
+        ...(desenv.split('\n').filter(l => /^\d+\.\d+\s/.test(l.trim())).map(l =>
+          new Paragraph({
+            children: [new TextRun({ text: '    ' + l.trim(), font: FONTE, size: TAMANHO })],
+            alignment: AlignmentType.LEFT,
+            spacing: { line: 360, lineRule: LineRuleType.AUTO },
+          })
+        )),
+        paraStyle('2 DESENVOLVIMENTO', { bold: true }),
+        paraStyle('3 CONCLUSÃO', { bold: true }),
+        paraStyle('REFERÊNCIAS', { bold: true }),
+      ];
+
+      sections.push({
+        properties: {
+          page: {
+            margin: { top: cm(30), right: cm(20), bottom: cm(20), left: cm(30) },
+            size: { width: cm(210), height: cm(297) },
+          },
+          type: SectionType.NEXT_PAGE,
+        },
+        headers: { default: new Header({ children: [] }) },
+        footers: { default: new Footer({ children: [] }) },
+        children: sumarioParas,
+      });
+    }
+
+    // ─── CORPO PRINCIPAL (Artigo + TCC) ───
+    const corpoParas = [];
+
+    // TÍTULO
+    corpoParas.push(
+      new Paragraph({
+        children: [new TextRun({ text: titulo.toUpperCase(), font: FONTE, size: TAMANHO + 4, bold: true })],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 120, line: 360, lineRule: LineRuleType.AUTO },
+      })
+    );
+
+    // AUTORIA
+    if (autor) corpoParas.push(
+      new Paragraph({
+        children: [new TextRun({ text: autor, font: FONTE, size: TAMANHO, bold: false, italics: false })],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 40, line: 240, lineRule: LineRuleType.AUTO },
+      })
+    );
+    if (inst) corpoParas.push(
+      new Paragraph({
+        children: [new TextRun({ text: inst, font: FONTE, size: TAMANHO_10, italics: true })],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 40, line: 240, lineRule: LineRuleType.AUTO },
+      })
+    );
+    if (email) corpoParas.push(
+      new Paragraph({
+        children: [new TextRun({ text: email, font: FONTE, size: TAMANHO_10 })],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 240, line: 240, lineRule: LineRuleType.AUTO },
+      })
+    );
+    if (dataVal) corpoParas.push(
+      new Paragraph({
+        children: [new TextRun({ text: new Date(dataVal + 'T12:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }), font: FONTE, size: TAMANHO_10 })],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 360, line: 240, lineRule: LineRuleType.AUTO },
+      })
+    );
+
+    // RESUMO
+    if (resumo) {
+      corpoParas.push(
+        new Paragraph({
+          children: [new TextRun({ text: 'RESUMO', font: FONTE, size: TAMANHO, bold: true })],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { before: 120, after: 40, line: 240, lineRule: LineRuleType.AUTO },
+        }),
+        new Paragraph({
+          children: [new TextRun({ text: resumo, font: FONTE, size: TAMANHO })],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { after: 40, line: 240, lineRule: LineRuleType.AUTO },
+        })
+      );
+    }
+    if (palavras) {
+      corpoParas.push(
+        new Paragraph({
+          children: [
+            new TextRun({ text: 'Palavras-chave: ', font: FONTE, size: TAMANHO, bold: true }),
+            new TextRun({ text: palavras, font: FONTE, size: TAMANHO }),
+          ],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { after: 360, line: 240, lineRule: LineRuleType.AUTO },
+        })
+      );
+    }
+
+    // 1 INTRODUÇÃO
+    corpoParas.push(heading1('1 Introdução'));
+    corpoParas.push(...textBlock(intro, { firstLine: true }));
+
+    // 2 DESENVOLVIMENTO
+    corpoParas.push(heading1('2 Desenvolvimento'));
+    corpoParas.push(...textBlock(desenv, { firstLine: true }));
+
+    // 3 CONCLUSÃO
+    corpoParas.push(heading1('3 Conclusão'));
+    corpoParas.push(...textBlock(conclusao, { firstLine: true }));
+
+    // REFERÊNCIAS
+    if (refs) {
+      corpoParas.push(heading1('Referências'));
+      corpoParas.push(...referenceList(refs));
+    }
+
+    sections.push({
+      properties: {
+        page: {
+          margin: { top: cm(30), right: cm(20), bottom: cm(20), left: cm(30) },
+          size: { width: cm(210), height: cm(297) },
+        },
+        type: isTcc ? SectionType.NEXT_PAGE : undefined,
+        pageNumberFormatType: NumberFormat.DECIMAL,
+        pageNumberStart: isTcc ? 4 : 1,
+      },
+      headers: { default: pageNumHeader },
+      children: corpoParas,
+    });
+
+    const doc = new Document({ sections });
+
+    const blob = await Packer.toBlob(doc);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const nomeArq = titulo.replace(/[^a-zA-ZÀ-ú0-9 ]/g, '').slice(0, 40).trim().replace(/ /g, '_') || 'trabalho';
+    a.href = url;
+    a.download = nomeArq + '_ABNT.docx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    mostrarToast('✓ DOCX gerado com sucesso!');
+  } catch(err) {
+    console.error(err);
+    mostrarToast('Erro ao gerar DOCX: ' + err.message);
+  } finally {
+    btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 1v9M5 7l3 3 3-3M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2"/></svg> Gerar DOCX`;
+    btn.disabled = false;
+  }
+}
+
+// ═══════ ORDENAR REFERÊNCIAS ═══════
+function ordenarReferencias() {
+  const ta = document.getElementById('referencias');
+  const linhas = ta.value.split('\n').filter(l => l.trim());
+  if (linhas.length < 2) { mostrarToast('Menos de 2 referências para ordenar.'); return; }
+  linhas.sort((a, b) => a.trim().localeCompare(b.trim(), 'pt-BR', { sensitivity: 'base' }));
+  ta.value = linhas.join('\n');
+  mostrarToast('✓ Referências ordenadas A→Z');
+}
+
+</script>
+
+<!-- DOCX.JS EMBUTIDO -->
 <script>
 var docx=function(e){Object.defineProperty(e,Symbol.toStringTag,{value:"Module"});var t=Object.create,r=Object.defineProperty,n=Object.getOwnPropertyDescriptor,i=Object.getOwnPropertyNames,o=Object.getPrototypeOf,s=Object.prototype.hasOwnProperty,a=(e,t)=>()=>(e&&(t=e(e=0)),t),l=(e,t)=>()=>(t||(e((t={exports:{}}).exports,t),e=null),t.exports),u=(e,a,l)=>(l=null!=e?t(o(e)):{},((e,t,o,a)=>{if(t&&"object"==typeof t||"function"==typeof t)for(var l,u=i(t),c=0,h=u.length;c<h;c++)l=u[c],s.call(e,l)||l===o||r(e,l,{get:(e=>t[e]).bind(null,l),enumerable:!(a=n(t,l))||a.enumerable});return e})(!a&&e&&e.__esModule?l:r(l,"default",{value:e,enumerable:!0}),e));function c(e){return c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},c(e)}function h(e){var t=function(e,t){if("object"!=c(e)||!e)return e;var r=e[Symbol.toPrimitive];if(void 0!==r){var n=r.call(e,t||"default");if("object"!=c(n))return n;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===t?String:Number)(e)}(e,"string");return"symbol"==c(t)?t:t+""}function p(e,t,r){return(t=h(t))in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}var d=class{constructor(e){p(this,"rootKey",void 0),this.rootKey=e}},f=Object.seal({}),m=class extends d{constructor(e){super(e),p(this,"root",void 0),this.root=new Array}prepForXml(e){var t;e.stack.push(this);const r=this.root.map(t=>t instanceof d?t.prepForXml(e):t).filter(e=>void 0!==e);return e.stack.pop(),{[this.rootKey]:r.length?1===r.length&&(null===(t=r[0])||void 0===t?void 0:t._attr)?r[0]:r:f}}addChildElement(e){return this.root.push(e),this}},w=class extends m{constructor(e,t){super(e),p(this,"includeIfEmpty",void 0),this.includeIfEmpty=t}prepForXml(e){const t=super.prepForXml(e);return this.includeIfEmpty||t&&("object"!=typeof t[this.rootKey]||Object.keys(t[this.rootKey]).length)?t:void 0}};function g(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e);t&&(n=n.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),r.push.apply(r,n)}return r}function y(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?g(Object(r),!0).forEach(function(t){p(e,t,r[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):g(Object(r)).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))})}return e}var v,b,x,_,E,T,S,A,k,I,R,N=class extends d{constructor(e){super("_attr"),p(this,"root",void 0),p(this,"xmlKeys",void 0),this.root=e}prepForXml(e){const t={};return Object.entries(this.root).forEach(([e,r])=>{if(void 0!==r){const n=this.xmlKeys&&this.xmlKeys[e]||e;t[n]=r}}),{_attr:t}}},C=class extends d{constructor(e){super("_attr"),p(this,"root",void 0),this.root=e}prepForXml(e){return{_attr:Object.values(this.root).filter(({value:e})=>void 0!==e).reduce((e,{key:t,value:r})=>y(y({},e),{},{[t]:r}),{})}}},O=class extends N{constructor(...e){super(...e),p(this,"xmlKeys",{val:"w:val",color:"w:color",fill:"w:fill",space:"w:space",sz:"w:sz",type:"w:type",rsidR:"w:rsidR",rsidRPr:"w:rsidRPr",rsidSect:"w:rsidSect",w:"w:w",h:"w:h",top:"w:top",right:"w:right",bottom:"w:bottom",left:"w:left",header:"w:header",footer:"w:footer",gutter:"w:gutter",linePitch:"w:linePitch",pos:"w:pos"})}},D=l((e,t)=>{var r,n="object"==typeof Reflect?Reflect:null,i=n&&"function"==typeof n.apply?n.apply:function(e,t,r){return Function.prototype.apply.call(e,t,r)};r=n&&"function"==typeof n.ownKeys?n.ownKeys:Object.getOwnPropertySymbols?function(e){return Object.getOwnPropertyNames(e).concat(Object.getOwnPropertySymbols(e))}:function(e){return Object.getOwnPropertyNames(e)};var o=Number.isNaN||function(e){return e!=e};function s(){s.init.call(this)}t.exports=s,t.exports.once=function(e,t){return new Promise(function(r,n){function i(r){e.removeListener(t,o),n(r)}function o(){"function"==typeof e.removeListener&&e.removeListener("error",i),r([].slice.call(arguments))}w(e,t,o,{once:!0}),"error"!==t&&function(e,t,r){"function"==typeof e.on&&w(e,"error",t,r)}(e,i,{once:!0})})},s.EventEmitter=s,s.prototype._events=void 0,s.prototype._eventsCount=0,s.prototype._maxListeners=void 0;var a=10;function l(e){if("function"!=typeof e)throw new TypeError('The "listener" argument must be of type Function. Received type '+typeof e)}function u(e){return void 0===e._maxListeners?s.defaultMaxListeners:e._maxListeners}function c(e,t,r,n){var i,o,s,a;if(l(r),void 0===(o=e._events)?(o=e._events=Object.create(null),e._eventsCount=0):(void 0!==o.newListener&&(e.emit("newListener",t,r.listener?r.listener:r),o=e._events),s=o[t]),void 0===s)s=o[t]=r,++e._eventsCount;else if("function"==typeof s?s=o[t]=n?[r,s]:[s,r]:n?s.unshift(r):s.push(r),(i=u(e))>0&&s.length>i&&!s.warned){s.warned=!0;var c=new Error("Possible EventEmitter memory leak detected. "+s.length+" "+String(t)+" listeners added. Use emitter.setMaxListeners() to increase limit");c.name="MaxListenersExceededWarning",c.emitter=e,c.type=t,c.count=s.length,a=c,console&&console.warn&&console.warn(a)}return e}function h(){if(!this.fired)return this.target.removeListener(this.type,this.wrapFn),this.fired=!0,0===arguments.length?this.listener.call(this.target):this.listener.apply(this.target,arguments)}function p(e,t,r){var n={fired:!1,wrapFn:void 0,target:e,type:t,listener:r},i=h.bind(n);return i.listener=r,n.wrapFn=i,i}function d(e,t,r){var n=e._events;if(void 0===n)return[];var i=n[t];return void 0===i?[]:"function"==typeof i?r?[i.listener||i]:[i]:r?function(e){for(var t=new Array(e.length),r=0;r<t.length;++r)t[r]=e[r].listener||e[r];return t}(i):m(i,i.length)}function f(e){var t=this._events;if(void 0!==t){var r=t[e];if("function"==typeof r)return 1;if(void 0!==r)return r.length}return 0}function m(e,t){for(var r=new Array(t),n=0;n<t;++n)r[n]=e[n];return r}function w(e,t,r,n){if("function"==typeof e.on)n.once?e.once(t,r):e.on(t,r);else{if("function"!=typeof e.addEventListener)throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type '+typeof e);e.addEventListener(t,function i(o){n.once&&e.removeEventListener(t,i),r(o)})}}Object.defineProperty(s,"defaultMaxListeners",{enumerable:!0,get:function(){return a},set:function(e){if("number"!=typeof e||e<0||o(e))throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received '+e+".");a=e}}),s.init=function(){void 0!==this._events&&this._events!==Object.getPrototypeOf(this)._events||(this._events=Object.create(null),this._eventsCount=0),this._maxListeners=this._maxListeners||void 0},s.prototype.setMaxListeners=function(e){if("number"!=typeof e||e<0||o(e))throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received '+e+".");return this._maxListeners=e,this},s.prototype.getMaxListeners=function(){return u(this)},s.prototype.emit=function(e){for(var t=[],r=1;r<arguments.length;r++)t.push(arguments[r]);var n="error"===e,o=this._events;if(void 0!==o)n=n&&void 0===o.error;else if(!n)return!1;if(n){var s;if(t.length>0&&(s=t[0]),s instanceof Error)throw s;var a=new Error("Unhandled error."+(s?" ("+s.message+")":""));throw a.context=s,a}var l=o[e];if(void 0===l)return!1;if("function"==typeof l)i(l,this,t);else{var u=l.length,c=m(l,u);for(r=0;r<u;++r)i(c[r],this,t)}return!0},s.prototype.addListener=function(e,t){return c(this,e,t,!1)},s.prototype.on=s.prototype.addListener,s.prototype.prependListener=function(e,t){return c(this,e,t,!0)},s.prototype.once=function(e,t){return l(t),this.on(e,p(this,e,t)),this},s.prototype.prependOnceListener=function(e,t){return l(t),this.prependListener(e,p(this,e,t)),this},s.prototype.removeListener=function(e,t){var r,n,i,o,s;if(l(t),void 0===(n=this._events))return this;if(void 0===(r=n[e]))return this;if(r===t||r.listener===t)0===--this._eventsCount?this._events=Object.create(null):(delete n[e],n.removeListener&&this.emit("removeListener",e,r.listener||t));else if("function"!=typeof r){for(i=-1,o=r.length-1;o>=0;o--)if(r[o]===t||r[o].listener===t){s=r[o].listener,i=o;break}if(i<0)return this;0===i?r.shift():function(e,t){for(;t+1<e.length;t++)e[t]=e[t+1];e.pop()}(r,i),1===r.length&&(n[e]=r[0]),void 0!==n.removeListener&&this.emit("removeListener",e,s||t)}return this},s.prototype.off=s.prototype.removeListener,s.prototype.removeAllListeners=function(e){var t,r,n=this._events;if(void 0===n)return this;if(void 0===n.removeListener)return 0===arguments.length?(this._events=Object.create(null),this._eventsCount=0):void 0!==n[e]&&(0===--this._eventsCount?this._events=Object.create(null):delete n[e]),this;if(0===arguments.length){var i,o=Object.keys(n);for(r=0;r<o.length;++r)"removeListener"!==(i=o[r])&&this.removeAllListeners(i);return this.removeAllListeners("removeListener"),this._events=Object.create(null),this._eventsCount=0,this}if("function"==typeof(t=n[e]))this.removeListener(e,t);else if(void 0!==t)for(r=t.length-1;r>=0;r--)this.removeListener(e,t[r]);return this},s.prototype.listeners=function(e){return d(this,e,!0)},s.prototype.rawListeners=function(e){return d(this,e,!1)},s.listenerCount=function(e,t){return"function"==typeof e.listenerCount?e.listenerCount(t):f.call(e,t)},s.prototype.listenerCount=f,s.prototype.eventNames=function(){return this._eventsCount>0?r(this._events):[]}}),P=l((e,t)=>{"function"==typeof Object.create?t.exports=function(e,t){t&&(e.super_=t,e.prototype=Object.create(t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}))}:t.exports=function(e,t){if(t){e.super_=t;var r=function(){};r.prototype=t.prototype,e.prototype=new r,e.prototype.constructor=e}}}),L=a(()=>{v=globalThis||self});function F(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}function B(){throw new Error("setTimeout has not been defined")}function M(){throw new Error("clearTimeout has not been defined")}function U(e){if(_===setTimeout)return setTimeout(e,0);if((_===B||!_)&&setTimeout)return _=setTimeout,setTimeout(e,0);try{return _(e,0)}catch(t){try{return _.call(null,e,0)}catch(t){return _.call(this,e,0)}}}function H(){S&&A&&(S=!1,A.length?T=A.concat(T):k=-1,T.length&&j())}function j(){if(!S){var e=U(H);S=!0;for(var t=T.length;t;){for(A=T,T=[];++k<t;)A&&A[k].run();k=-1,t=T.length}A=null,S=!1,function(e){if(E===clearTimeout)return clearTimeout(e);if((E===M||!E)&&clearTimeout)return E=clearTimeout,clearTimeout(e);try{return E(e)}catch(t){try{return E.call(null,e)}catch(t){return E.call(this,e)}}}(e)}}function z(e,t){this.fun=e,this.array=t}function W(){}var G=a(()=>{x=(b={exports:{}}).exports={},function(){try{_="function"==typeof setTimeout?setTimeout:B}catch(e){_=B}try{E="function"==typeof clearTimeout?clearTimeout:M}catch(e){E=M}}(),T=[],S=!1,k=-1,x.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var r=1;r<arguments.length;r++)t[r-1]=arguments[r];T.push(new z(e,t)),1!==T.length||S||U(j)},z.prototype.run=function(){this.fun.apply(null,this.array)},x.title="browser",x.browser=!0,x.env={},x.argv=[],x.version="",x.versions={},x.on=W,x.addListener=W,x.once=W,x.off=W,x.removeListener=W,x.removeAllListeners=W,x.emit=W,x.prependListener=W,x.prependOnceListener=W,x.listeners=function(e){return[]},x.binding=function(e){throw new Error("process.binding is not supported")},x.cwd=function(){return"/"},x.chdir=function(e){throw new Error("process.chdir is not supported")},x.umask=function(){return 0},I=b.exports,R=F(I)}),K=l((e,t)=>{t.exports=D().EventEmitter}),V=l(e=>{e.byteLength=function(e){var t=s(e),r=t[0],n=t[1];return 3*(r+n)/4-n},e.toByteArray=function(e){var t,i,o=s(e),a=o[0],l=o[1],u=new n(function(e,t,r){return 3*(t+r)/4-r}(0,a,l)),c=0,h=l>0?a-4:a;for(i=0;i<h;i+=4)t=r[e.charCodeAt(i)]<<18|r[e.charCodeAt(i+1)]<<12|r[e.charCodeAt(i+2)]<<6|r[e.charCodeAt(i+3)],u[c++]=t>>16&255,u[c++]=t>>8&255,u[c++]=255&t;2===l&&(t=r[e.charCodeAt(i)]<<2|r[e.charCodeAt(i+1)]>>4,u[c++]=255&t);1===l&&(t=r[e.charCodeAt(i)]<<10|r[e.charCodeAt(i+1)]<<4|r[e.charCodeAt(i+2)]>>2,u[c++]=t>>8&255,u[c++]=255&t);return u},e.fromByteArray=function(e){for(var r,n=e.length,i=n%3,o=[],s=16383,a=0,u=n-i;a<u;a+=s)o.push(l(e,a,a+s>u?u:a+s));1===i?(r=e[n-1],o.push(t[r>>2]+t[r<<4&63]+"==")):2===i&&(r=(e[n-2]<<8)+e[n-1],o.push(t[r>>10]+t[r>>4&63]+t[r<<2&63]+"="));return o.join("")};for(var t=[],r=[],n="undefined"!=typeof Uint8Array?Uint8Array:Array,i="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",o=0;o<64;++o)t[o]=i[o],r[i.charCodeAt(o)]=o;function s(e){var t=e.length;if(t%4>0)throw new Error("Invalid string. Length must be a multiple of 4");var r=e.indexOf("=");return-1===r&&(r=t),[r,r===t?0:4-r%4]}function a(e){return t[e>>18&63]+t[e>>12&63]+t[e>>6&63]+t[63&e]}function l(e,t,r){for(var n,i=[],o=t;o<r;o+=3)n=(e[o]<<16&16711680)+(e[o+1]<<8&65280)+(255&e[o+2]),i.push(a(n));return i.join("")}r["-".charCodeAt(0)]=62,r["_".charCodeAt(0)]=63}),$=l(e=>{
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */

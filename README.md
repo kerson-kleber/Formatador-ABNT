@@ -1,94 +1,80 @@
 # ⊞ Formatador ABNT
 
-> Ferramenta gratuita para formatação de artigos científicos, TCCs e monografias conforme as normas ABNT.
+Ferramenta web **100% offline** para formatação acadêmica de Artigos Científicos e TCC/Monografias conforme as normas ABNT vigentes — **NBR 6022, NBR 6027 e NBR 10520**.
+
+Um único arquivo HTML autocontido. Sem instalação, sem servidor, sem conta, sem dados enviados a lugar nenhum.
 
 ---
 
-## 🎓 Filosofia do Projeto
+## 🎓 Filosofia do projeto
 
-Este projeto foi criado para **democratizar o acesso à formatação acadêmica**.
+Este projeto foi criado para democratizar o acesso à formatação acadêmica.
 
-Muitos estudantes enfrentam dificuldades com normas, margens, espaçamentos e elementos pré-textuais. O objetivo desta ferramenta é reduzir essas barreiras técnicas, permitindo que o estudante concentre seus esforços naquilo que realmente importa: **pesquisar, refletir, aprender e produzir conhecimento**.
+Muitos estudantes enfrentam dificuldades com normas, margens, espaçamentos e elementos pré-textuais. O objetivo desta ferramenta é reduzir essas barreiras técnicas, permitindo que o estudante concentre seus esforços naquilo que realmente importa: pesquisar, refletir, aprender e produzir conhecimento.
 
-> *"De graça recebestes, de graça dai."* — Mt 10.8
+**A ferramenta só formata o que o estudante mesmo escreve, cola e indica — ela nunca decide nada por ele.** Não há detecção automática de citações, referências ou estrutura em nenhuma das três abas. O aprendizado ocorre também durante a escrita; por isso, o Formatador ABNT não produz conteúdo acadêmico algum, só organiza o que já foi produzido.
 
 Gratuito, livre e desenvolvido para apoiar a educação.
 
----
+## 📌 Compatibilidade institucional
 
-## 📋 O que a ferramenta faz
+Embora o documento seja gerado seguindo as principais normas ABNT vigentes, algumas instituições de ensino possuem manuais próprios com exigências específicas. Recomenda-se conferir as orientações da sua instituição e realizar eventuais ajustes após a geração do documento.
 
-- Gera documentos `.docx` formatados conforme as normas ABNT (NBR 6022, NBR 6027, NBR 10520)
-- Configurações automáticas: Arial 12pt, margens 3/2/3/2 cm, papel A4, espaçamento 1,5, parágrafos justificados, numeração no canto superior direito
-- Formatação de elementos pré-textuais: capa, folha de rosto, resumo, abstract, sumário
-- Formatador de citações diretas e indiretas (NBR 10520)
-- Gerador de referências bibliográficas
-- Funciona **100% offline** — nenhum dado é enviado a servidores
-- Arquivo único `.html` — sem instalação, sem dependências externas
+## 📚 Observações acadêmicas
+
+Este formatador auxilia exclusivamente na organização e formatação técnica de trabalhos acadêmicos conforme os padrões ABNT mais utilizados. A elaboração do conteúdo, a pesquisa bibliográfica, a análise dos dados, a argumentação científica, a revisão textual e a qualidade acadêmica do trabalho permanecem sob responsabilidade do autor.
 
 ---
 
-## 📌 Compatibilidade Institucional
+## ✨ Funcionalidades
 
-Embora o documento seja gerado seguindo as principais normas ABNT vigentes, algumas instituições de ensino possuem **manuais próprios com exigências específicas**.
+### ① Artigo / TCC
+- Alternância entre dois modelos de documento: **Artigo Científico** e **TCC / Monografia**
+- Modo TCC exibe automaticamente os campos adicionais de capa e folha de rosto (instituição, curso, orientador, local)
+- Campos pré-textuais completos: título, autor, instituição, e-mail, data, resumo, palavras-chave
+- Corpo do trabalho: introdução, desenvolvimento (com subtítulos numerados), conclusão e referências
+- Geração de arquivo **.docx** pronto pra abrir no Word/LibreOffice, com nome de arquivo derivado do título
 
-Recomenda-se conferir as orientações da sua instituição e realizar eventuais ajustes após a geração do documento.
+### ② Referências
+- Não gera referências automaticamente — orienta o estudante a usar o **MORE/UFSC** (Mecanismo Online para Referências), gerador oficial e gratuito conforme a NBR 6023:2018
+- Botão de acesso direto ao MORE
+- Botão **A→Z** para ordenar alfabeticamente as referências já coladas no campo, por sobrenome
+
+### ③ Citações (NBR 10520)
+Três sub-abas, cada uma com formatação e validação de campos obrigatórios:
+- **Direta curta** — citação direta de até 3 linhas, com aspas
+- **Direta longa** — citação direta com mais de 3 linhas, recuada
+- **Indireta** — paráfrase, com página opcional
+- Marcador de supressão `[...]` inserível no ponto do cursor
+- Campo opcional de "referência completa" para conferência lado a lado
+- Botão de copiar a citação formatada
 
 ---
 
-## 📚 Observações Acadêmicas
+## 📂 Estrutura do repositório
 
-Este formatador auxilia **exclusivamente** na organização e formatação técnica de trabalhos acadêmicos.
+| Arquivo | Descrição |
+|---|---|
+| `Formatador_ABNT_v3_DIST.html` | Versão de distribuição — pronta pra baixar e usar |
 
-A elaboração do conteúdo, a pesquisa bibliográfica, a análise dos dados, a argumentação científica, a revisão textual e a qualidade acadêmica do trabalho **permanecem sob responsabilidade do autor**.
-
-O aprendizado ocorre também durante a escrita. Por isso, **esta ferramenta não produz conteúdos acadêmicos automaticamente**.
-
----
+O código-fonte é mantido e evoluído em ambiente próprio; este repositório disponibiliza a versão de distribuição, testada e validada, para uso direto pelo estudante.
 
 ## 🚀 Como usar
 
-1. Faça o download do arquivo `Formatador_ABNT_v2_DIST.html`
-2. Abra o arquivo em qualquer navegador moderno (**Edge ou Firefox recomendados**)
-3. Preencha os campos com os dados do seu trabalho
-4. Clique em **Gerar DOCX**
-5. Abra o arquivo gerado no Word ou LibreOffice e faça os ajustes finais necessários
+1. Baixe o arquivo `Formatador_ABNT_v3_DIST.html`
+2. Abra no navegador — **recomendado Edge ou Firefox** (o Chrome tem restrições com `file://` que podem afetar o funcionamento local)
+3. Preencha os campos e gere seu documento — nenhuma informação sai do seu computador
 
-> ⚠️ **Nota de compatibilidade:** O Chrome pode apresentar restrições ao abrir arquivos HTML localmente via `file://`. Recomenda-se o uso do Microsoft Edge ou Mozilla Firefox.
+Não requer internet após o carregamento inicial, não usa `localStorage`, não coleta nenhum dado do estudante.
 
-> 💡 **Para desenvolvedores e educadores:** o código-fonte comentado está disponível em `Formatador_ABNT_v2_SRC.html`.
+## 🧩 Tecnologia
 
----
-
-## 🔒 Registro de Autoria
-
-Esta obra está registrada em cartório como garantia de anterioridade autoral.
-A distribuição é permanentemente gratuita, desde que **citado o autor**.
-
----
+Arquivo HTML único, sem dependências externas além da biblioteca [docx.js](https://docx.js.org/) (terceiros, embutida) para geração dos arquivos `.docx`.
 
 ## 📄 Licença
 
-Este projeto é distribuído sob a licença **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
+**Filantrópica e livre.** Distribuição permanentemente gratuita, desde que citado o autor.
 
-Você é livre para:
-- **Compartilhar** — copiar e redistribuir o material em qualquer meio ou formato
-- **Adaptar** — remixar, transformar e criar a partir do material para qualquer fim
+> *"De graça recebestes, de graça dai."* — Mt 10.8
 
-Desde que:
-- **Atribuição** — seja dado o crédito apropriado ao autor, com indicação do nome e da licença
-
-> 🔗 Leia os termos completos em: [creativecommons.org/licenses/by/4.0](https://creativecommons.org/licenses/by/4.0/deed.pt_BR)
-
----
-
-## 👤 Autor
-
-**Kerson Kleber Espínola Pereira**
-TILSP · Professor
-
-> *"Boas mãos fazem toda a diferença."*
-
----
-
-*Distribuição permanentemente gratuita, desde que citado o autor — Mt 10.8*
+Desenvolvido por **Kerson Kleber Espínola Pereira** — TILSP · Professor
